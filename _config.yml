@@ -72,7 +72,7 @@ github_username: NileshArnaiya # your GitHub user name
 gitlab_username: # your GitLab user name
 x_username: NileshArnaiya # your X handle
 mastodon_username: # your mastodon instance+username in the format instance.tld/@username
-linkedin_username: /in/nilesharnaiya # your LinkedIn user name
+linkedin_username: nilesharnaiya # your LinkedIn user name
 telegram_username: # your Telegram user name
 scholar_userid: # your Google Scholar ID
 semanticscholar_id: # your Semantic Scholar ID
@@ -99,7 +99,7 @@ pinterest_id: # your pinterest id
 unsplash_id: # your unsplash id
 instagram_id: notsohuman.ai# your instagram id
 facebook_id: # your facebook id
-youtube_id: https://www.youtube.com/@2minuteai # your youtube channel id (youtube.com/@<youtube_id>)
+youtube_id: 2minuteai # your youtube channel id (youtube.com/@<youtube_id>)
 discord_id: # your discord id (18-digit unique numerical identifier)
 zotero_username: # your zotero username
 wechat_qr: # filename of your wechat qr-code saved as an image (e.g., wechat-qr.png if saved to assets/img/wechat-qr.png)
