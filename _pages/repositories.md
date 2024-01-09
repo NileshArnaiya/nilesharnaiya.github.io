@@ -1,7 +1,7 @@
 ---
 layout: page
-permalink: /writings/
-title: writings
+permalink: /ai-art/
+title: AI Art 
 description: Edit the `_data/repositories.yml` and change the `github_users` and `github_repos` lists to include your own GitHub profile and repositories.
 nav: true
 nav_order: 4
@@ -15,7 +15,7 @@ nav_order: 4
     {% include repository/repo_user.html username=user %}
   {% endfor %}
 </div>
-
+All this garbage will go away. 
 ---
 
 {% if site.repo_trophies.enabled %}
