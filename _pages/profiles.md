@@ -1,8 +1,8 @@
 ---
-layout: profiles
-permalink: /people/
-title: people
-description: members of the lab or group
+layout: page
+permalink: /talks/
+title: talks
+description: My conference talks 
 nav: true
 nav_order: 7
 
