@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /writings/
-title: writings
+title: Writings
 nav: true
 nav_order: 1
 pagination:
