@@ -1,9 +1,9 @@
 ---
 layout: page
-permalink: /ai-art/
-title: AI Art 
+permalink: /projects/
+title: Projects 
 nav: true
-nav_order: 5
+nav_order: 4
 ---
 
 ## GitHub users

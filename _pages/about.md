@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About 
 permalink: /
 subtitle: <a href='#'>Education at Yale,</a> Witsie, Ex-Imbizo, Ex-MAD, Ex-Your Etc.
 

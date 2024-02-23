@@ -10,7 +10,5 @@ children:
     - title: divider
     - title: Date proposal
       permalink: /date-proposal/
-    - title: divider
-    - title: Precious Travelogue
-      permalink: /travel/
+  
 ---
