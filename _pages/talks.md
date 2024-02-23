@@ -4,7 +4,7 @@ permalink: /talks/
 title: talks
 description: My conference talks 
 nav: true
-nav_order: 7
+nav_order: 2
 
 profiles:
   # if you want to include more than one profile, just replicate the following block
