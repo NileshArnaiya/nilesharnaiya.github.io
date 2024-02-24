@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: cv
 permalink: /recommendations/
 title: Recommendations
 description: Some of the movies, books, music, etc that I like. 

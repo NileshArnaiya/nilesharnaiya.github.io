@@ -1,34 +1,28 @@
-- title: General Information
-  type: map
-  contents:
-    - name: Full Name
-      value: Albert Einstein
-    - name: Date of Birth
-      value: 14th March 1879
-    - name: Languages
-      value: English, German
 
-- title: Education
+- title: Books 
   type: time_table
   contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
+    - title: A brief history of intelligence 
+      institution: BY Max Bennett
+      year: 2023
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
+        - A wonderful read on how neuroscience guides the way forward in the ever growing interest in AI, all the capabilities that we are inspired by come from learning about the brain and how it works and it's fascinating how the brain works. 
+    - title: Algorithms to live by
+      institution: Brian Christian
+      year: 2016
       description:
-        - Description 1.
-        - Description 2.
+        - How computer science algorithms help us in our day to day life, living an optimal life using the algorithms we designed. Interesting things - 37% rule, Epsilon Greedy Policy, Caching, etc. 
 
-- title: Experience
+    - title: Behave
+      institution: Robert Sopolsky
+      year: 2017
+      description:
+      - This one is for the behaviorists, from the guy at Stanford who gives crazy lectures to this crazy book of evolution and behavior - check out his course playlist on youtube. I would read this book instead of that overhyped book Sapiens with hundreds of factual mistakes. 
+    - title: How the mind works
+      institution: Steven Pinker
+      year: 1997
+      description: Cannot emphasize enough on this amazing book of everything inside you works, the power of the brain, you think you understand people? Read this book to clear your misunderstanding.
+- title: Movies
   type: time_table
   contents:
     - title: Professor of Theoretical Physics
@@ -61,37 +55,48 @@
       institution: University of Zurich, Zurich, Switzerland
       year: 1909 - 1911
 
-- title: Open Source Projects
+- title: Games
   type: time_table
   contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
+    - title: <a href="https://github.com/microsoft/flight-simulator">Microsoft Flight Simulator</a>
+      year: Latest
+      description: An all-time great, this is what even pilots use, a world of it's own, played only recently in 2024
 
-- title: Honors and Awards
+- title: Music
   type: time_table
   contents:
-    - year: 1921
+    - year: 2039
       items: 
-        - Nobel Prize in Physics 
-        - Matteucci Medal
-    - year: 2029
-      items: 
-        - Max Planck Medal
+        - NAah, can't do music, just ask me for my playlist, I'm not a spotify supporter
 
-- title: Academic Interests
+- title: Academic Papers
   type: nested_list
   contents:
-    - title: Topic 1.
-      items: 
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
-      items:
-        - Description 1.
-        - Description 2.
+    - title: Transformers Paper.
+    - title: Backpropagation Paper.
+    - title: David Marr's 3 levels paper.
+    - title: Alan Turing 1950's paper on the Turing Test.
+    - title: HyperDiffusion/ Stable Diffusion Paper
+    - title: Continual Learning papers
+    - title: Robots learning from demonstrations 
+    - title: A deep learning framework for neuroscience 
+    - title: Elephants don't play chess 
+    - title: 
 
-- title: Other Interests
+
+- title: Travel Tips (Exhaustive) .. Coming Soon.
   type: list
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - Please don't reach 3 hours before on international flights. Check if the airport is busy and it's not December. 
+    - No zostels, try dharamshalas or ashrams with beautiful gardens. 
+    - Paying for good shoes and a backpack goes a long way.
+    - Take free polaroid when on emirates, also carry wired earphones since many airlines don't offer free headphones. (That might change soon)
+    - Eat lots of icecream flavours in Europe and ask the locals for the beer suggestions when in Czech republic. 
+    - Buses are always late in NYC and Washington D.C, so are Trains in India. 
+    - Foreigners have a quota to book trains in India, one day prior at the Nearest Booking office.
+    - Use Flixbus or OMIO when in Europe, and google maps shows every damn detail for transportation.
+    - Buy weekly rail passes in Europe.   
+    - Don't flaunt your phone or jewellery when in africa, stay away from murder haha
+    - Visit Kashmir, Hampi, Arunachal Pradesh, Mumbai, Meghalaya, Rajasthan once in your life. 
+
+
