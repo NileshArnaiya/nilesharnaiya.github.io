@@ -1,8 +1,8 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
+title: PyConZA
+description: PYCON ZA 2022 Talk in Durban, South Africa
+img: assets/img/pycon_za.jpg
 importance: 2
 category: work
 giscus_comments: true

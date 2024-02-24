@@ -1,27 +1,46 @@
 ---
 layout: page
-permalink: /projects/
-title: Projects 
+title: AI Art
+permalink: /ai-art/
+description: A growing collection of Diffusion Generated Pictures.
+website: instagram.com
 nav: true
-nav_order: 4
+nav_order: 5
+display_categories: [work, fun]
+horizontal: false
 ---
 
-## GitHub users
+<style>
 
-{% if site.data.repositories.github_users %}
-<div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
-  {% for user in site.data.repositories.github_users %}
-    {% include repository/repo_user.html username=user %}
-  {% endfor %}
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust column width as needed */
+    grid-gap: 10px; /* Adjust gap between images as needed */
+}
+
+.image-gallery img {
+    width: 100%;
+    height: auto;
+}
+
+  </style>
+<!-- pages/projects.md -->
+
+
+<div style="padding:20px">
+    <a href="https://www.instagram.com/notsohuman.ai" target="_blank">FollLow us on Instagram</a>
 </div>
-{% endif %}
 
-## GitHub Repositories
+  <div class="grid">
 
-{% if site.data.repositories.github_repos %}
-<div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
-  {% for repo in site.data.repositories.github_repos %}
-    {% include repository/repo.html repository=repo %}
-  {% endfor %}
+  <!-- Inside your Jekyll template file, such as a page or post -->
+<div class="image-gallery">
+    {% for image in site.static_files %}
+        {% if image.path contains '/photos/' %}
+            <img src="{{ site.baseurl }}{{ image.path }}" alt="Image">
+        {% endif %}
+    {% endfor %}
 </div>
-{% endif %}
+
+  </div>
+</div>
