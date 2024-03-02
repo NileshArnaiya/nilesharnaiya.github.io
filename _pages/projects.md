@@ -11,6 +11,20 @@ Don't miss out on my first ever Internship Project -
     <a href="https://gnani-editor.firebaseapp.com/" target="_blank">Gnani Editor</a>
     <br>
     I have tons which are Private, which might not show below. 
+    <br>
+    <span>Some silly chrome extensions below
+    <br>
+       <a href="https://chromewebstore.google.com/detail/motivational-video-extens/cpdlfeohbkmpfdffmjfelicfkhbmbcdg" target="_blank">Motivational Video Extension</a>
+    <br>
+    </span>
+    <span>
+       <a href="https://chromewebstore.google.com/detail/dipaddllajdekkjnbilinclnfeaeebki" target="_blank">Bookmark sharing</a>
+    <br>
+
+  </span>
+    <br>
+    All my apps in my dev account were taken down by Google, since 3 of the apps were flagged for harmful content, where in reality they did not want anyone using the old Youtube API, no explanations were given. 
+
 </div>
 
 <div>
