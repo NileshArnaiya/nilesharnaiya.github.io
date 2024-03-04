@@ -18,7 +18,7 @@ latest_posts: true  # includes a list of the newest posts
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
-Site is still under development and going migration changes - Generative AI.
+Site is still under writing. 
 
 No ChatGPTs were harmed while writing my life so far. It's 9th Jan 2024.
 
