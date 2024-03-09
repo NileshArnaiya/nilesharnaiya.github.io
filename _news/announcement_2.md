@@ -1,7 +1,7 @@
 ---
 layout: post
-title: A long announcement with details
-date: 2015-11-07 16:11:00-0400
+title: Anything exciting will be announced here. Not many would reach here or care. 
+date: 2024-03-09 16:11:00-0400
 inline: false
 related_posts: false
 ---
