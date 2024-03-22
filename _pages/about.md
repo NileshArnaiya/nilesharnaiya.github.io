@@ -34,11 +34,11 @@ Boring BIO Loading...
 
 I learned to code pretty late when I was 17 years old, compared to the kids I taught being age 7 and up. Immediately the passion to learn was fueled, and I put in all the hard work – pulled all-nighters, learned from edX, Udacity(They had an app - that old I am), Coursera before it was cool – they were literally just launched then.
 
-Was fully lost after failing my 12th grade due to stupid absence of mind and made crazy mistakes like doing a diploma, who does that, shit. but we learn.
+Was lost to my senses after failing my 12th grade due to an absence of mind(it was almost a taare zameen par scene) and made grave mistakes like doing a diploma, who does that, shit. but we learn.
 
-Did 5 internships in undergrad in Bangalore, which was accidental as Dad just casually slipped in Bangalore in a conversation, and I searched and applied… just casually, and then I went. Scared shitless to take my first flight, and then it dawned on me that I had to stay alone with so many people. Made me strong going away for long for the first time.
+Did 5 internships in undergrad in Bangalore, which was accidental as Dad just casually slipped in Bangalore in a conversation, and I searched and applied… just casually, and then I went & stayed there for 3 years. Scared shitless to take my first flight, and then it dawned on me that I had to stay alone with so many people. Made me strong going away for long for the first time.
 
-School again didn't teach much, all was self-taught, but the exposure of Bangalore was great – attending the meetups there, got used to getting stickers, pens, and free lunch (Pizzas!) and sometimes t-shirts. My family still tells me this guy never buys t-shirts. Now I don't even buy socks :P
+School again didn't teach much, all was self-taught, but the exposure of Bangalore was great – attending the meetups there, got used to getting stickers, pens, books, bottles and free lunch (Pizzas!) and sometimes t-shirts(It was called swag only that time onwards). My family still tells me this guy never buys t-shirts. Now I don't even buy socks :P
 
 After all the exposure, internships (2 unpaid and 3 less paid) were in Android app development – those were the rage before AI tools came in. Did a bit of ReactJS and web dev here and there. Transformers didn't exist, idk why I do this to make myself feel old.
 
@@ -46,7 +46,7 @@ Did my first proper job (3 months :P) at Webloom solutions, but I couldn't handl
 
 I'm currently working as a Machine Learning Engineer with a SA-based startup (Casabio.org), I'm building a product on mentoring. Manifesting you know. I'm in the process of making my own business identity as my fuel for jobs is as less fueled as the New Star trek movie. PS: I come from a business(Baniya) family who are extremely religious(as per them) but don't follow it religiously.
 
-Love making friends - any comma in the previous three words and it's a disaster. 
+Love making friends - any comma, in the previous three words and it's a disaster. 
 
 I'm a serial conference traveller and organizer for various conferences. 
 
