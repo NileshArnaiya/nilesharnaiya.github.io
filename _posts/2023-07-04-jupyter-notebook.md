@@ -1,16 +1,16 @@
 ---
 layout: post
-title: a post with jupyter notebook
-date: 2023-07-04 08:57:00-0400
-description: an example of a blog post with jupyter notebook
-tags: formatting jupyter
-categories: sample-posts
+title: Eric Barker Blog - Bakadesuyo.com
+date: 2021-11-16 08:57:00-0400
+description: My takeaways after reading all his blogs and twitter
+tags: science hacks blog
+categories: blog-posts
 giscus_comments: true
-related_posts: false
+related_posts: true
 featured: true
 ---
 
-To include a jupyter notebook in a post, you can use the following code:
+<!-- you can use the following code:
 
 {% raw %}
 
@@ -42,4 +42,4 @@ The plugin takes as input the path to the notebook, but it assumes the file exis
 {% endif %}
 {:/nomarkdown}
 
-Note that the jupyter notebook supports both light and dark themes.
+Note that the jupyter notebook supports both light and dark themes. -->
