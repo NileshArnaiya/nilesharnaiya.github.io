@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  a post with github metadata
-date: 2020-09-28 21:01:00
-description: a quick run down on accessing github metadata.
-tags: metadata
-categories: sample-posts external-services
+title:  Living with the wires
+date: 2020-03-23 21:01:00
+description: What it means to understand our wiring and anxiety
+tags: psychology anxiety brain
+categories: blog-posts brain-posts
 featured: true
 ---
-
+<!-- 
 A sample blog page that demonstrates the accessing of github meta data.
 
 ## What does Github-MetaData do?
@@ -34,4 +34,4 @@ A sample blog page that demonstrates the accessing of github meta data.
 * Contributors :
 {% for contributor in site.github.contributors %}
   * {{ contributor.login }}
-{% endfor %}
+{% endfor %} -->

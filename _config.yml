@@ -125,7 +125,7 @@ bing_site_verification:  # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Per aspera ad astra # blog_name will be displayed in your blog page
-blog_description: All the writings that should not go in vain
+blog_description: All the writings that should not go in vain <br> Find Thoughts, Ideas from a Person who takes long sabbaticals every three weeks.
 permalink: /blog/:year/:title/
 
 # Pagination
