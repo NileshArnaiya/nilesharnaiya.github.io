@@ -40,9 +40,9 @@ Did 5 internships in undergrad in Bangalore, which was accidental as Dad just ca
 
 School again didn't teach much, all was self-taught, but the exposure of Bangalore was great – attending the meetups there, got used to getting stickers, pens, books, bottles and free lunch (Pizzas!) and sometimes t-shirts(It was called swag only that time onwards). My family still tells me this guy never buys t-shirts. Now I don't even buy socks :P
 
-After all the exposure, internships (2 unpaid and 3 less paid) were in Android app development – those were the rage before AI tools came in. Did a bit of ReactJS and web dev here and there. Transformers didn't exist, idk why I do this to make myself feel old.
+<!-- After all the exposure, internships (2 unpaid and 3 less paid) were in Android app development – those were the rage before AI tools came in. Did a bit of ReactJS and web dev here and there. Transformers didn't exist, idk why I do this to make myself feel old. -->
 
-Did my first proper job (3 months :P) at Webloom solutions, but I couldn't handle it, so it was a mutual quit. Got fired from the next job at Genuin (Ahmedabad Story) coz I wasn't good enough. Next job, I was bored and quit in 2.5 months and waited for 4 months to get a South African visa to do my Master's there.
+<!-- Did my first proper job (3 months :P) at Webloom solutions, but I couldn't handle it, so it was a mutual quit. Got fired from the next job at Genuin (Ahmedabad Story) coz I wasn't good enough. Next job, I was bored and quit in 2.5 months and waited for 4 months to get a South African visa to do my Master's there. -->
 
 I'm currently working as a Machine Learning Engineer and building Upcourse.io and codeuplab.com, I'm building a product on mentoring. In the process of making my own business identity as my fuel for jobs and clients is as less fueled as the New Star trek movie. PS: I come from a business family.
 
