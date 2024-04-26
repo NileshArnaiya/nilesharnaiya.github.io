@@ -44,7 +44,7 @@ After all the exposure, internships (2 unpaid and 3 less paid) were in Android a
 
 Did my first proper job (3 months :P) at Webloom solutions, but I couldn't handle it, so it was a mutual quit. Got fired from the next job at Genuin (Ahmedabad Story) coz I wasn't good enough. Next job, I was bored and quit in 2.5 months and waited for 4 months to get a South African visa to do my Master's there.
 
-I'm currently working as a Machine Learning Engineer with a SA-based startup (Casabio.org), I'm building a product on mentoring. Manifesting you know. I'm in the process of making my own business identity as my fuel for jobs is as less fueled as the New Star trek movie. PS: I come from a business(Baniya) family who are extremely religious(as per them) but don't follow it religiously.
+I'm currently working as a Machine Learning Engineer and building Upcourse.io and codeuplab.com, I'm building a product on mentoring. In the process of making my own business identity as my fuel for jobs and clients is as less fueled as the New Star trek movie. PS: I come from a business family.
 
 Love making friends - any comma, in the previous three words and it's a disaster. 
 
