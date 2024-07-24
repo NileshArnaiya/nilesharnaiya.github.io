@@ -2,7 +2,7 @@
 layout: about
 title: About 
 permalink: /
-subtitle: <a href='https://drive.google.com/drive/u/0/folders/1eD0IRP0Rn1Wo2huvY2UGzxyLJ7Qixo7g'>ALL That I Have Shipped so far. </a> Education at Yale, Witsie, Ex-Imbizo, Ex-MAD, Ex-Your Etc.
+subtitle: <a href='https://drive.google.com/drive/u/0/folders/1eD0IRP0Rn1Wo2huvY2UGzxyLJ7Qixo7g'>ALL that I Have shipped so far. </a> Gng to Yale sn, Ex-Witsie, Ex-Imbizo, Ex-MAD, Your-Ex Etc.
 
 profile:
   align: right
