@@ -60,9 +60,14 @@ nav_order: 3
 <div class="work-experience">
   <div class="card">
     <h2>Founder</h2>
-    <p><strong>Notsohuman AI</strong> </p>
+    <p><strong>Notsohuman AI (https://visual-ly.vercel.app)</strong> </p>
     <p><strong>Duration:</strong> Dec 2022 - Present</p>
     <p>We are a generative AI Company focused on building tools for regional Indian languages</p>
+  </div>
+
+  <div class="card">
+  <h2> Working as a data scientist at Beam </h2>
+  <p> Duration: June 24 - Present </p>
   </div>
 
   <div class="card">
@@ -97,7 +102,7 @@ nav_order: 3
 
    <div class="card">
     <h2>Community Organizer</h2>
-    <p><strong>MakeADifference </strong> NGO </p>
+    <p><strong>MakeADifference </strong> NGO</p>
     <p><strong>Duration:</strong> Dec - 2019 - July/2021</p>
     <p>We made cool reels, videos in collaboration, game plans to engage the community of mentors and teachers from different teams of the MAD Mumbai chapter to socialize and have fun. While us also having fun :)</p>
   </div>
