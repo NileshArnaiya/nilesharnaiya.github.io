@@ -24,7 +24,7 @@ No ChatGPTs were harmed while writing my life so far. It's 9th Jan 2024.
 
 Thank you for visiting my bio. Welcome to my world. I'm Nilesh Jain/Arnaiya.
 
-Current plans to enjoy work as a DS, build on https://visual-ly.vercel.app, run the residency in bangalore and go to yale soon and build a edtech company. 
+Current plans to enjoy work as a DS, build on <a href='https://visual-ly.vercel.app'> Visually </a>, run the residency in bangalore and go to yale soon and build a edtech company. 
 
 Are you lost?? Do you feel sometimes everyone is trying to get you? But nobody is. 
 Do you feel like you do nothing with your life? Nothingness can be super awesome and not boring. 
