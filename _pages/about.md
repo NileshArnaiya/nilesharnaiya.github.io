@@ -24,12 +24,14 @@ No ChatGPTs were harmed while writing my life so far. It's 9th Jan 2024.
 
 Thank you for visiting my bio. Welcome to my world. I'm Nilesh Jain/Arnaiya.
 
-Current plans to enjoy work as a DS, build on <a href='https://visual-ly.vercel.app'> Visually </a>, run the residency in bangalore and go to yale soon and build a edtech company - <a href='https://codeuplab.com'> Codeuplab </a> and a B2b Saas <a href='https://1kitchen.in'> 1kitchen Restaurant POS and Inventory </a> 
+Building https://upcourse.io, https://navalnow.vercel.app, https://airbnbai.vercel.app, https://codeuplab.com and mentoring on Topmate and Mentorcruise.  
+Current plans to enjoy work, build on <a href='https://upcourse.io'> Upcourse </a>, run the residency (https://livetheresidency.com) in bangalore and go to yale soon and build a edtech company - <a href='https://codeuplab.com'> Codeuplab </a> and a B2b Saas <a href='https://1kitchen.vercel.app'> 1kitchen Restaurant POS and Inventory </a> 
+Previously built Buildawn.com
 
 Are you lost?? Do you feel sometimes everyone is trying to get you? But nobody is. 
 Do you feel like you do nothing with your life? Nothingness can be super awesome and not boring. 
 Don't you also like to experience the beauty of life, aging, travel in different phases of your living span? 
-Don'y you wanna just hang out with strangers in a hostel and travel places, hike, hear jaw dropping stories and make a story of your life? NO YOLO POLO, don't you want to spend money(exploit) 63% of the time and save only 37% of the time(Explore). Don;t you want to make a bucketlist, finish it and then make another? Or have you lost your curiosity with life? No right! Then why on earth we just live life like it shouldn't be lived. 
+Don'y you wanna just hang out with strangers in a hostel and travel places, hike, hear jaw dropping stories and make a story of your life? NO YOLO POLO, don't you want to spend money(exploit) 63% of the time and save only 37% of the time(Explore). Don;t you want to make a bucketlist, finish it and then make another? Or have you lost your curiosity with life? No right! Then why on earth we just live life like it shouldn't be lived. Don't be mediocre, be ambitious. 
 
 
 Boring BIO Loading...
