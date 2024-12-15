@@ -21,7 +21,9 @@ social: true
 Hi, I'm **Nilesh Jain / Arnaiya**. Thank you for stopping by my bio.  
 
 I'm currently building projects like:  
-- [Upcourse.io](https://upcourse.io) – Interactive education labs.  
+- [Upcourse.io](https://upcourse.io) – Interactive education labs to learn anything.  
+- [Pybooks.com](https://pybooks.com) – Jupyter notebooks for teachers.  
+
 - [CodeUpLab](https://codeuplab.com) – Helping students learn programming and data science.  
 - [NavalNow](https://navalnow.vercel.app) – Naval Ravikant's wisdom distilled.  
 - [1Kitchen POS](https://1kitchen.vercel.app) – Restaurant management software.  
