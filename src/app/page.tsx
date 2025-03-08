@@ -19,8 +19,6 @@ import {
 } from 'lucide-react';
 
 
-
-
 // Custom hook for scroll-based animations
 const useScrollAnimation = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -51,6 +49,7 @@ const useScrollAnimation = () => {
 
   return { ref, isVisible };
 };
+
 
 // Main component
 const PersonalWebsite = () => {
@@ -98,6 +97,8 @@ const PersonalWebsite = () => {
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
             ))}
+            <a href="https://niloferai.substack.com/" target="_blank" rel="noopener noreferrer" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">Substack</a>
+            <a href="mailto:nilesh.jain@yale.edu" className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Email</a>
           </div>
         </div>
         
@@ -132,6 +133,10 @@ const PersonalWebsite = () => {
         <ProjectsSection />
       </section>
 
+      <section id="recommendations2" className="min-h-screen py-20">
+        <RecommendationsPage />
+      </section>
+
       {/* Writings Section */}
       <section id="writings" className="min-h-screen py-20">
         <WritingsSection />
@@ -157,6 +162,7 @@ const PersonalWebsite = () => {
         <div className="max-w-4xl mx-auto px-4">
           <h3 className="text-xl font-bold mb-4">Stay Connected 📱</h3>
           <div className="flex justify-center space-x-6 mb-6">
+            <p> Email me at nilesh[dot]jain[at]yale[dot]edu</p>
             <a href="https://twitter.com/nilesharnaiya" className="hover:text-blue-400 transition">Twitter</a>
             <a href="https://linkedin.com/in/nilesharnaiya" className="hover:text-blue-400 transition">LinkedIn</a>
             <a href="https://instagram.com/NotSoHuman.AI" className="hover:text-blue-400 transition">Instagram</a>
@@ -164,6 +170,218 @@ const PersonalWebsite = () => {
           <p className="text-gray-400">&copy; {new Date().getFullYear()} Nilesh Jain / Arnaiya. All rights reserved.</p>
         </div>
       </footer>
+    </div>
+  );
+};
+
+const RecommendationsPage = () => {
+  const [activeCategory, setActiveCategory] = useState('books');
+  
+  const categories = [
+    { id: 'books', label: 'Books' },
+    { id: 'movies', label: 'Movies' },
+    { id: 'games', label: 'Games' },
+    { id: 'music', label: 'Music' },
+    { id: 'papers', label: 'Academic Papers' },
+    { id: 'travel', label: 'Travel Tips' },
+  ];
+  
+  const recommendations = {
+    books: [
+      {
+        year: '2023',
+        title: 'A brief history of intelligence',
+        author: 'Max Bennett',
+        description: 'A wonderful read on how neuroscience guides the way forward in the ever growing interest in AI, all the capabilities that we are inspired by come from learning about the brain and how it works and its fascinating how the brain works.'
+      },
+      {
+        year: '2016',
+        title: 'Algorithms to live by',
+        author: 'Brian Christian',
+        description: 'How computer science algorithms help us in our day to day life, living an optimal life using the algorithms we designed. Interesting things - 37% rule, Epsilon Greedy Policy, Caching, etc.'
+      },
+      {
+        year: '2017',
+        title: 'Behave',
+        author: 'Robert Sopolsky',
+        description: 'This one is for the behaviorists, from the guy at Stanford who gives crazy lectures to this crazy book of evolution and behavior - check out his course playlist on youtube. I would read this book instead of that overhyped book Sapiens with hundreds of factual mistakes.'
+      },
+      {
+        year: '1997',
+        title: 'How the mind works',
+        author: 'Steven Pinker',
+        description: 'Cannot emphasize enough on this amazing book of everything inside you works, the power of the brain, you think you understand people? Read this book to clear your misunderstanding.'
+      }
+    ],
+    movies: [
+      {
+        year: '2007',
+        title: 'Taare Zameen Par',
+        description: 'Dyslexia, Parenthood, caring, music, bonding, lost and found'
+      },
+      {
+        year: '1994',
+        title: 'Forrest Gump',
+        description: 'Those who are simple, who follow what is said to them religiously without overthinking go ahead in life, no matter what people think about them, people judge them and laugh at them and then go wrong in the end. PS- Aamir khan remake was beautiful, so beautiful to do Forrest Gump in an Indian version, people missed out on that movie.'
+      },
+      {
+        year: '',
+        title: 'Waqt - Race against time',
+        description: 'Loved it for the father-son bond and the son gets back on his feet and all the heavy emotions in this movie makes me cry to this day.'
+      },
+      {
+        year: '',
+        title: 'Roti',
+        description: 'This one from rajesh khanna where he emphasizes on the importance of roti and the fights he does only to get 2 rotis in his stomach.'
+      }
+    ],
+    games: [
+      {
+        year: 'Latest',
+        title: 'Microsoft Flight Simulator',
+        description: 'An all-time great, this is what even pilots use, a world of its own, played only recently in 2024'
+      },
+      {
+        year: 'Latest',
+        title: 'Far Cry 6',
+        description: 'Beautiful graphics in nature and rebel storyline.'
+      },
+      {
+        year: '2018',
+        title: 'Battlefield one',
+        description: 'World war one setup in this beautiful story.'
+      }
+    ],
+    music: [
+      {
+        title: 'NAah, cant do music, just ask me for my playlist, I am m not a spotify supporter',
+        description: ''
+      }
+    ],
+    papers: [
+      {
+        title: 'Transformers Paper',
+        description: ''
+      },
+      {
+        title: 'Backpropagation Paper',
+        description: ''
+      },
+      {
+        title: 'David Marrs 3 levels paper',
+        description: ''
+      },
+      {
+        title: 'Alan Turing 1950s paper on the Turing Test',
+        description: ''
+      },
+      {
+        title: 'HyperDiffusion/ Stable Diffusion Paper',
+        description: ''
+      },
+      {
+        title: 'Continual Learning papers',
+        description: ''
+      },
+      {
+        title: 'Robots learning from demonstrations',
+        description: ''
+      },
+      {
+        title: 'A deep learning framework for neuroscience',
+        description: ''
+      },
+      {
+        title: 'Elephants dont play chess',
+        description: ''
+      }
+    ],
+    travel: [
+      {
+        title: 'Airport Tips',
+        description: 'Please dont reach 3 hours before on international flights. Check if the airport is busy and its not December.'
+      },
+      {
+        title: 'Accommodation',
+        description: 'No zostels, try dharamshalas or ashrams with beautiful gardens.'
+      },
+      {
+        title: 'Safety',
+        description: 'Always keep fake cards and fake phones incase you get robbed'
+      },
+      {
+        title: 'Navigation',
+        description: 'Always download offline maps'
+      },
+      {
+        title: 'Essential Practices',
+        description: 'Remember some contact details. Ask uber drivers to take you offline instead of uber..generally is safe.'
+      },
+      {
+        title: 'Equipment',
+        description: 'Paying for good shoes and a backpack goes a long way.'
+      },
+      {
+        title: 'Flight Hacks',
+        description: 'Take free polaroid when on emirates, also carry wired earphones since many airlines dont offer free headphones. (That might change soon)'
+      },
+      {
+        title: 'Food & Drink',
+        description: 'Eat lots of icecream flavours in Europe and ask the locals for the beer suggestions when in Czech republic.'
+      },
+      {
+        title: 'Transport',
+        description: 'Buses are always late in NYC and Washington D.C, so are Trains in India. Foreigners have a quota to book trains in India, one day prior at the Nearest Booking office. Use Flixbus or OMIO when in Europe, and google maps shows every damn detail for transportation. Buy weekly rail passes in Europe.'
+      },
+      {
+        title: 'Regional Advice',
+        description: 'Dont flaunt your phone or jewellery when in africa, stay away from murder haha'
+      },
+      {
+        title: 'Must-Visit Places in India',
+        description: 'Visit Kashmir, Hampi, Arunachal Pradesh, Mumbai, Meghalaya, Rajasthan, Varanasi once in your life.'
+      }
+    ]
+  };
+
+  return (
+    <div className="bg-gray-900 min-h-screen text-white py-16 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-16">
+          <h1 className="text-5xl font-bold mb-4">Recommendations</h1>
+          <p className="text-xl text-blue-400">Some of the movies, books, music, etc that I like.</p>
+        </div>
+
+        <div className="mb-8 flex flex-wrap gap-2">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 
+                ${activeCategory === category.id 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}`}
+            >
+              {category.label}
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {recommendations[activeCategory as keyof typeof recommendations].map((item: { title: string; year?: string; author?: string; description?: string }, index: number) => (
+            <div 
+              key={index} 
+              className="bg-gray-800 p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20"
+            >
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-xl font-bold text-blue-400">{item.title}</h3>
+                {item.year && <span className="text-sm bg-gray-700 px-2 py-1 rounded">{item.year}</span>}
+              </div>
+              {item.author && <p className="text-gray-400 mb-3">BY {item.author}</p>}
+              {item.description && <p className="text-gray-300 leading-relaxed">{item.description}</p>}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
@@ -207,22 +425,22 @@ const HeroSection = () => {
           <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:transform hover:scale-105 transition">
             <div className="text-blue-400 mb-4"><MapPin size={32} /></div>
             <h4 className="text-xl font-bold mb-2">Yale University</h4>
-            <p>Heading to Yale as a research associate 🎓</p>
+            <p>Working at Yale as a research associate 🎓</p>
           </div>
           <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:transform hover:scale-105 transition">
             <div className="text-green-400 mb-4"><Briefcase size={32} /></div>
             <h4 className="text-xl font-bold mb-2">The Residency</h4>
-            <p>Running The Residency in Bangalore</p>
+            <p>Running The Residency (a hacker house) in Bangalore</p>
           </div>
           <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:transform hover:scale-105 transition">
             <div className="text-purple-400 mb-4"><User size={32} /></div>
-            <h4 className="text-xl font-bold mb-2">Mentoring</h4>
-            <p>Mentoring on Topmate and Mentorcruise</p>
+            <h4 className="text-xl font-bold mb-2">Educational Consulting</h4>
+            <p>Mentoring on Topmate and Mentorcruise and Consulting Founders</p>
           </div>
           <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:transform hover:scale-105 transition">
             <div className="text-orange-400 mb-4"><MessageSquare size={32} /></div>
-            <h4 className="text-xl font-bold mb-2">IndabaX</h4>
-            <p>Helping organize IndabaX, spreading AI knowledge across Africa</p>
+            <h4 className="text-xl font-bold mb-2">BibbyAI & Upcourse.io</h4>
+            <p>Working on BibbyAI and Upcourse.io, pushing the boundaries of AI and education</p>
           </div>
         </div>
       </div>
@@ -253,17 +471,17 @@ const JourneySection = () => {
     {
       year: "Career Experiments",
       title: "Professional Shapeshifter",
-      description: "I've held various roles – some successful, others not so much. From teaching to full-stack development, Android apps to data science, each experience shaped my path."
+      description: "I've held various roles – some successful, others not so much. From teaching to full-stack development, Android apps to data science, each experience shaped my path. I've also been fired and also quit one"
     },
     {
       year: "South Africa",
       title: "Teaching & Learning",
-      description: "I taught for a semester in South Africa while pursuing my Master's degree, an experience that broadened my global perspective and reinforced my passion for education."
+      description: "I taught IB subjects to rich students for a semester in South Africa while pursuing my Master's degree, an experience that broadened my global perspective and reinforced my passion for education."
     },
     {
       year: "Present Day",
       title: "Founder & Researcher",
-      description: "Now heading to Yale as a research associate while running multiple tech ventures including Pybooks, Bibby AI, and others. Constantly seeking new challenges and ways to make an impact."
+      description: "Now at Yale as a research associate while running multiple tech ventures including Pybooks, Bibby AI, and others. Constantly seeking new challenges and ways to make an impact."
     }
   ];
   
@@ -289,7 +507,7 @@ const JourneySection = () => {
             </div>
           </div>
         ))}
-      </div>
+      
       
       <div className="mt-16 text-center">
         <h3 className="text-2xl font-bold mb-6">Things I Love 💡</h3>
@@ -336,6 +554,25 @@ const JourneySection = () => {
           </div>
         </div>
       </div>
+
+      <div className="mt-16 text-center">
+        <h3 className="text-2xl font-bold mb-6">Past Ventures 🚀</h3>
+        <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">A glimpse into my entrepreneurial and creative endeavors</p>
+        <div className="flex flex-wrap justify-center gap-8">
+          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
+            <h4 className="text-xl font-bold mb-4 text-blue-400">BuildawnLabs</h4>
+            <p className="text-gray-300">Computer assembly startup co-founded with Sagar Kotian.</p>
+          </div>
+          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
+            <h4 className="text-xl font-bold mb-4 text-green-400">Airbnb Listing Improver</h4>
+            <p className="text-gray-300">Service for property owners to enhance their listings.</p>
+          </div>
+          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
+            <h4 className="text-xl font-bold mb-4 text-purple-400">NotSoHuman.AI</h4>
+            <p className="text-gray-300">Instagram account featuring math simulations and AI content.</p>
+          </div>
+        </div>
+      </div>
       
       <div className="mt-16 text-center">
         <h3 className="text-2xl font-bold mb-6">Random Fun Facts 🎉</h3>
@@ -367,8 +604,10 @@ const JourneySection = () => {
         </div>
       </div>
     </div>
+    </div>
   );
 };
+
 
 // Projects Section Component
 const ProjectsSection = () => {
@@ -377,39 +616,45 @@ const ProjectsSection = () => {
   const projects = [
     {
       title: "Upcourse.io",
+      link:"https://upcourse.io",
       icon: <Lightbulb size={32} className="text-yellow-400" />,
       description: "Interactive education labs to learn anything. A platform that transforms traditional educational content into interactive, hands-on learning experiences.",
       tags: ["Education", "EdTech", "Interactive Learning"]
     },
     {
+      title: "Bibby AI",
+      link:"https://trybibby.com",
+      icon: <Briefcase size={32} className="text-red-400" />,
+      description: "Leveraging artificial intelligence to transform knowledge management and information retrieval in educational contexts.",
+      tags: ["AI", "Education", "Knowledge Management"]
+    },
+    {
       title: "Pybooks.com",
+      link:"https://pybooks.com",
       icon: <Code size={32} className="text-blue-400" />,
       description: "Jupyter notebooks for teachers. Making computational tools accessible to educators with ready-to-use templates and resources.",
       tags: ["EdTech", "Python", "Data Science"]
     },
     {
       title: "CodeUpLab",
+      link:"https://codeuplab.com",
       icon: <BookOpen size={32} className="text-green-400" />,
       description: "Helping students learn programming and data science through structured, project-based curricula and personalized guidance.",
       tags: ["Education", "Programming", "Mentoring"]
     },
     {
-      title: "NavalNow",
+      title: "Math Simulations",
+      link:"https://myjainism.com/beta-test/revisiondojo/2",
       icon: <Feather size={32} className="text-purple-400" />,
-      description: "Naval Ravikant's wisdom distilled. A curated collection of insights and principles from one of tech's most thoughtful philosophers.",
+      description: "Math wisdom distilled. A curated collection of math concepts explained using a simulation tech I created",
       tags: ["Knowledge", "Philosophy", "Wisdom"]
     },
     {
       title: "1Kitchen POS",
+      link:"https://1kitchen.vercel.app/",
       icon: <Coffee size={32} className="text-orange-400" />,
       description: "Restaurant management software designed to streamline operations and enhance customer experience in food service establishments.",
       tags: ["SaaS", "Hospitality", "Management"]
-    },
-    {
-      title: "Bibby AI",
-      icon: <Briefcase size={32} className="text-red-400" />,
-      description: "Leveraging artificial intelligence to transform knowledge management and information retrieval in educational contexts.",
-      tags: ["AI", "Education", "Knowledge Management"]
     }
   ];
   
@@ -420,7 +665,7 @@ const ProjectsSection = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
-          <div key={index} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl hover:transform hover:scale-105 transition duration-300">
+          <a key={index} href={`${project.link}`} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl hover:transform hover:scale-105 transition duration-300">
             <div className="p-6">
               <div className="mb-4">
                 {project.icon}
@@ -435,7 +680,7 @@ const ProjectsSection = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
       
