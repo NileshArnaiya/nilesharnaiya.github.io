@@ -17,7 +17,7 @@ import {
   Feather,
   MapPin
 } from 'lucide-react';
-import { HeroSection, JourneySection, ProjectsSection, WritingsSection, TalksSection, RecommendationsSection, DatingSection } from './components';
+// Removed the import statement for './components' due to the error
 
 // Custom hook for scroll-based animations
 const useScrollAnimation = () => {
