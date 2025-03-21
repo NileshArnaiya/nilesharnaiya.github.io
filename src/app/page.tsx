@@ -17,7 +17,7 @@ import {
   Feather,
   MapPin
 } from 'lucide-react';
-
+import { HeroSection, JourneySection, ProjectsSection, WritingsSection, TalksSection, RecommendationsSection, DatingSection } from './components';
 
 // Custom hook for scroll-based animations
 const useScrollAnimation = () => {
@@ -50,7 +50,6 @@ const useScrollAnimation = () => {
   return { ref, isVisible };
 };
 
-
 // Main component
 const PersonalWebsite = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -76,6 +75,7 @@ const PersonalWebsite = () => {
           <button 
             className="md:hidden text-white focus:outline-none"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               {menuOpen ? (
@@ -93,6 +93,7 @@ const PersonalWebsite = () => {
                 key={section}
                 onClick={() => scrollToSection(section)}
                 className={`hover:text-blue-400 transition ${activeSection === section ? 'text-blue-400 font-bold' : ''}`}
+                aria-label={`Go to ${section.charAt(0).toUpperCase() + section.slice(1)}`}
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
@@ -110,6 +111,7 @@ const PersonalWebsite = () => {
                 key={section}
                 onClick={() => scrollToSection(section)}
                 className={`block w-full text-left py-2 hover:text-blue-400 transition ${activeSection === section ? 'text-blue-400 font-bold' : ''}`}
+                aria-label={`Go to ${section.charAt(0).toUpperCase() + section.slice(1)}`}
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
