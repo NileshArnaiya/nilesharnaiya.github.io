@@ -1,1095 +1,177 @@
-'use client';
-import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Globe, 
-  Briefcase, 
-  BookOpen, 
-  Music, 
-  Heart, 
-  Code, 
-  User, 
-  MessageSquare,
-  Lightbulb,
-  Coffee,
-  BookMarked,
-  Video,
-  Star,
-  Feather,
-  MapPin
-} from 'lucide-react';
-// Removed the import statement for './components' due to the error
+"use client"
+import { useEffect, useRef, useState } from "react"
+import { useScroll } from "framer-motion"
+import GhibliScene from "./components/ghibli-scene"
+import FloatingIsland from "./components/floating-island"
+import ProjectsForest from "./components/projects-forest"
+import JourneyRiver from "./components/journey-river"
+import WritingsClouds from "./components/writings-clouds"
+import RecommendationsMountain from "./components/recommendations-mountain"
+import DateMeValley from "./components/date-me-valley"
+import MagicalCursor from "./components/magical-cursor"
+import AudioPlayer from "./components/audio-player"
+import AutoWalkingPencil from "./components/auto-walking-pencil"
+import VerticalNavigation from "./components/vertical-navigation"
 
-// Custom hook for scroll-based animations
-const useScrollAnimation = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      {
-        threshold: 0.1,
-      }
-    );
+export default function Home() {
+  const [currentScene, setCurrentScene] = useState("home")
+  const [audioEnabled, setAudioEnabled] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+  const scenes = [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "projects", label: "Projects" },
+    { id: "journey", label: "Journey" },
+    { id: "writings", label: "Writings" },
+    { id: "recommendations", label: "Recommendations" },
+    { id: "dateMe", label: "Date Me" },
+  ]
 
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  })
 
-  return { ref, isVisible };
-};
-
-// Main component
-const PersonalWebsite = () => {
-  const [activeSection, setActiveSection] = useState('home');
-  const [menuOpen, setMenuOpen] = useState(false);
-  
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+  const handleSceneChange = (scene: string) => {
+    setCurrentScene(scene)
+    // Scroll to the scene
+    const element = document.getElementById(scene)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" })
     }
-    setActiveSection(sectionId);
-    setMenuOpen(false);
-  };
+  }
+
+  // Update current scene based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window !== "undefined") {
+        const scrollPosition = window.scrollY
+        const windowHeight = window.innerHeight
+
+        scenes.forEach(({ id }) => {
+          const element = document.getElementById(id)
+          if (element) {
+            const rect = element.getBoundingClientRect()
+            if (rect.top <= windowHeight * 0.5 && rect.bottom >= windowHeight * 0.5) {
+              setCurrentScene(id)
+            }
+          }
+        })
+      }
+    }
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll)
+    }
+    
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("scroll", handleScroll)
+      }
+    }
+  }, [])
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen text-white font-sans">
-      {/* Navigation */}
-      <nav className="fixed w-full bg-black bg-opacity-80 backdrop-blur-sm p-4 z-50">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="text-xl font-bold">Nilesh Jain <span className="text-blue-400">/ Arnaiya</span></div>
-          
-          {/* Mobile menu button */}
-          <button 
-            className="md:hidden text-white focus:outline-none"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              {menuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-              )}
-            </svg>
-          </button>
-          
-          {/* Desktop navigation */}
-          <div className="hidden md:flex space-x-6">
-            {['home', 'journey', 'projects', 'writings', 'talks', 'recommendations', 'dating'].map((section) => (
-              <button
-                key={section}
-                onClick={() => scrollToSection(section)}
-                className={`hover:text-blue-400 transition ${activeSection === section ? 'text-blue-400 font-bold' : ''}`}
-                aria-label={`Go to ${section.charAt(0).toUpperCase() + section.slice(1)}`}
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </button>
-            ))}
-            <a href="https://niloferai.substack.com/" target="_blank" rel="noopener noreferrer" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">Substack</a>
-            <a href="mailto:nilesh.jain@yale.edu" className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Email</a>
-          </div>
-        </div>
-        
-        {/* Mobile menu */}
-        {menuOpen && (
-          <div className="md:hidden bg-black bg-opacity-90 mt-4 p-4 rounded">
-            {['home', 'journey', 'projects', 'writings', 'talks', 'recommendations', 'dating'].map((section) => (
-              <button
-                key={section}
-                onClick={() => scrollToSection(section)}
-                className={`block w-full text-left py-2 hover:text-blue-400 transition ${activeSection === section ? 'text-blue-400 font-bold' : ''}`}
-                aria-label={`Go to ${section.charAt(0).toUpperCase() + section.slice(1)}`}
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </button>
-            ))}
-          </div>
-        )}
-      </nav>
+    <main ref={containerRef} className="relative w-full bg-background overflow-hidden">
+      {/* Magical cursor effect */}
+      <MagicalCursor />
 
-      {/* Hero Section */}
-      <section id="home" className="min-h-screen pt-20 flex items-center justify-center">
-        <HeroSection />
-      </section>
+      {/* Audio controls */}
+      <div className="fixed top-5 right-5 z-50">
+        <AudioPlayer enabled={audioEnabled} onToggle={() => setAudioEnabled(!audioEnabled)} />
+      </div>
 
-      {/* Journey Section */}
-      <section id="journey" className="min-h-screen py-20">
-        <JourneySection />
-      </section>
+      {/* Vertical Navigation */}
+      <VerticalNavigation activeSection={currentScene} onNavigate={handleSceneChange} />
 
-      {/* Projects Section */}
-      <section id="projects" className="min-h-screen py-20">
-        <ProjectsSection />
-      </section>
+      {/* Animated walking pencil character */}
+      <AutoWalkingPencil />
 
-      <section id="recommendations2" className="min-h-screen py-20">
-        <RecommendationsPage />
-      </section>
+      {/* Main content */}
+      <div className="relative ml-16">
+        {/* Home scene */}
+        <section id="home" className="h-screen relative">
+          <GhibliScene />
+        </section>
 
-      {/* Writings Section */}
-      <section id="writings" className="min-h-screen py-20">
-        <WritingsSection />
-      </section>
+        {/* About scene */}
+        <section id="about" className="min-h-screen relative">
+          <FloatingIsland />
+        </section>
 
-      {/* Talks Section */}
-      <section id="talks" className="min-h-screen py-20">
-        <TalksSection />
-      </section>
+        {/* Projects scene */}
+        <section id="projects" className="min-h-screen relative">
+          <ProjectsForest />
+        </section>
 
-      {/* Recommendations Section */}
-      <section id="recommendations" className="min-h-screen py-20">
-        <RecommendationsSection />
-      </section>
+        {/* Journey scene */}
+        <section id="journey" className="min-h-screen relative">
+          <JourneyRiver />
+        </section>
 
-      {/* Dating Section */}
-      <section id="dating" className="min-h-screen py-20">
-        <DatingSection />
-      </section>
+        {/* Writings scene */}
+        <section id="writings" className="min-h-screen relative">
+          <WritingsClouds />
+        </section>
+
+        {/* Recommendations scene */}
+        <section id="recommendations" className="min-h-screen relative">
+          <RecommendationsMountain />
+        </section>
+
+        {/* Date Me scene */}
+        <section id="dateMe" className="min-h-screen relative">
+          <DateMeValley />
+        </section>
+      </div>
 
       {/* Footer */}
-      <footer className="bg-black py-8 text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <h3 className="text-xl font-bold mb-4">Stay Connected 📱</h3>
-          <div className="flex justify-center space-x-6 mb-6">
-            <p> Email me at nilesh[dot]jain[at]yale[dot]edu</p>
-            <a href="https://twitter.com/nilesharnaiya" className="hover:text-blue-400 transition">Twitter</a>
-            <a href="https://linkedin.com/in/nilesharnaiya" className="hover:text-blue-400 transition">LinkedIn</a>
-            <a href="https://instagram.com/NotSoHuman.AI" className="hover:text-blue-400 transition">Instagram</a>
+      <footer className="relative py-8 bg-muted border-t border-border ml-16">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <h3 className="text-lg font-bold text-foreground">Nilesh Jain / Arnaiya</h3>
+              <p className="text-sm text-muted-foreground">Researcher • Founder • Educator</p>
+            </div>
+
+            <div className="flex flex-col items-center md:items-end">
+              <p className="text-sm text-muted-foreground mb-2">Stay Connected</p>
+              <div className="flex space-x-4">
+                <a
+                  href="https://twitter.com/nilesharnaiya"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground hover:text-primary transition-colors"
+                >
+                  Twitter
+                </a>
+                <a
+                  href="https://linkedin.com/in/nilesharnaiya"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground hover:text-primary transition-colors"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://instagram.com/NotSoHuman.AI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground hover:text-primary transition-colors"
+                >
+                  Instagram
+                </a>
+              </div>
+            </div>
           </div>
-          <p className="text-gray-400">&copy; {new Date().getFullYear()} Nilesh Jain / Arnaiya. All rights reserved.</p>
+
+          <div className="mt-8 text-center text-sm text-muted-foreground">
+            <p>© {new Date().getFullYear()} Nilesh Jain. All rights reserved.</p>
+          </div>
         </div>
       </footer>
-    </div>
-  );
-};
-
-const RecommendationsPage = () => {
-  const [activeCategory, setActiveCategory] = useState('books');
-  
-  const categories = [
-    { id: 'books', label: 'Books' },
-    { id: 'movies', label: 'Movies' },
-    { id: 'games', label: 'Games' },
-    { id: 'music', label: 'Music' },
-    { id: 'papers', label: 'Academic Papers' },
-    { id: 'travel', label: 'Travel Tips' },
-  ];
-  
-  const recommendations = {
-    books: [
-      {
-        year: '2023',
-        title: 'A brief history of intelligence',
-        author: 'Max Bennett',
-        description: 'A wonderful read on how neuroscience guides the way forward in the ever growing interest in AI, all the capabilities that we are inspired by come from learning about the brain and how it works and its fascinating how the brain works.'
-      },
-      {
-        year: '2016',
-        title: 'Algorithms to live by',
-        author: 'Brian Christian',
-        description: 'How computer science algorithms help us in our day to day life, living an optimal life using the algorithms we designed. Interesting things - 37% rule, Epsilon Greedy Policy, Caching, etc.'
-      },
-      {
-        year: '2017',
-        title: 'Behave',
-        author: 'Robert Sopolsky',
-        description: 'This one is for the behaviorists, from the guy at Stanford who gives crazy lectures to this crazy book of evolution and behavior - check out his course playlist on youtube. I would read this book instead of that overhyped book Sapiens with hundreds of factual mistakes.'
-      },
-      {
-        year: '1997',
-        title: 'How the mind works',
-        author: 'Steven Pinker',
-        description: 'Cannot emphasize enough on this amazing book of everything inside you works, the power of the brain, you think you understand people? Read this book to clear your misunderstanding.'
-      }
-    ],
-    movies: [
-      {
-        year: '2007',
-        title: 'Taare Zameen Par',
-        description: 'Dyslexia, Parenthood, caring, music, bonding, lost and found'
-      },
-      {
-        year: '1994',
-        title: 'Forrest Gump',
-        description: 'Those who are simple, who follow what is said to them religiously without overthinking go ahead in life, no matter what people think about them, people judge them and laugh at them and then go wrong in the end. PS- Aamir khan remake was beautiful, so beautiful to do Forrest Gump in an Indian version, people missed out on that movie.'
-      },
-      {
-        year: '',
-        title: 'Waqt - Race against time',
-        description: 'Loved it for the father-son bond and the son gets back on his feet and all the heavy emotions in this movie makes me cry to this day.'
-      },
-      {
-        year: '',
-        title: 'Roti',
-        description: 'This one from rajesh khanna where he emphasizes on the importance of roti and the fights he does only to get 2 rotis in his stomach.'
-      }
-    ],
-    games: [
-      {
-        year: 'Latest',
-        title: 'Microsoft Flight Simulator',
-        description: 'An all-time great, this is what even pilots use, a world of its own, played only recently in 2024'
-      },
-      {
-        year: 'Latest',
-        title: 'Far Cry 6',
-        description: 'Beautiful graphics in nature and rebel storyline.'
-      },
-      {
-        year: '2018',
-        title: 'Battlefield one',
-        description: 'World war one setup in this beautiful story.'
-      }
-    ],
-    music: [
-      {
-        title: 'NAah, cant do music, just ask me for my playlist, I am m not a spotify supporter',
-        description: ''
-      }
-    ],
-    papers: [
-      {
-        title: 'Transformers Paper',
-        description: ''
-      },
-      {
-        title: 'Backpropagation Paper',
-        description: ''
-      },
-      {
-        title: 'David Marrs 3 levels paper',
-        description: ''
-      },
-      {
-        title: 'Alan Turing 1950s paper on the Turing Test',
-        description: ''
-      },
-      {
-        title: 'HyperDiffusion/ Stable Diffusion Paper',
-        description: ''
-      },
-      {
-        title: 'Continual Learning papers',
-        description: ''
-      },
-      {
-        title: 'Robots learning from demonstrations',
-        description: ''
-      },
-      {
-        title: 'A deep learning framework for neuroscience',
-        description: ''
-      },
-      {
-        title: 'Elephants dont play chess',
-        description: ''
-      }
-    ],
-    travel: [
-      {
-        title: 'Airport Tips',
-        description: 'Please dont reach 3 hours before on international flights. Check if the airport is busy and its not December.'
-      },
-      {
-        title: 'Accommodation',
-        description: 'No zostels, try dharamshalas or ashrams with beautiful gardens.'
-      },
-      {
-        title: 'Safety',
-        description: 'Always keep fake cards and fake phones incase you get robbed'
-      },
-      {
-        title: 'Navigation',
-        description: 'Always download offline maps'
-      },
-      {
-        title: 'Essential Practices',
-        description: 'Remember some contact details. Ask uber drivers to take you offline instead of uber..generally is safe.'
-      },
-      {
-        title: 'Equipment',
-        description: 'Paying for good shoes and a backpack goes a long way.'
-      },
-      {
-        title: 'Flight Hacks',
-        description: 'Take free polaroid when on emirates, also carry wired earphones since many airlines dont offer free headphones. (That might change soon)'
-      },
-      {
-        title: 'Food & Drink',
-        description: 'Eat lots of icecream flavours in Europe and ask the locals for the beer suggestions when in Czech republic.'
-      },
-      {
-        title: 'Transport',
-        description: 'Buses are always late in NYC and Washington D.C, so are Trains in India. Foreigners have a quota to book trains in India, one day prior at the Nearest Booking office. Use Flixbus or OMIO when in Europe, and google maps shows every damn detail for transportation. Buy weekly rail passes in Europe.'
-      },
-      {
-        title: 'Regional Advice',
-        description: 'Dont flaunt your phone or jewellery when in africa, stay away from murder haha'
-      },
-      {
-        title: 'Must-Visit Places in India',
-        description: 'Visit Kashmir, Hampi, Arunachal Pradesh, Mumbai, Meghalaya, Rajasthan, Varanasi once in your life.'
-      }
-    ]
-  };
-
-  return (
-    <div className="bg-gray-900 min-h-screen text-white py-16 px-4 md:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-16">
-          <h1 className="text-5xl font-bold mb-4">Recommendations</h1>
-          <p className="text-xl text-blue-400">Some of the movies, books, music, etc that I like.</p>
-        </div>
-
-        <div className="mb-8 flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 
-                ${activeCategory === category.id 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}`}
-            >
-              {category.label}
-            </button>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {recommendations[activeCategory as keyof typeof recommendations].map((item: { title: string; year?: string; author?: string; description?: string }, index: number) => (
-            <div 
-              key={index} 
-              className="bg-gray-800 p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20"
-            >
-              <div className="flex justify-between items-start mb-3">
-                <h3 className="text-xl font-bold text-blue-400">{item.title}</h3>
-                {item.year && <span className="text-sm bg-gray-700 px-2 py-1 rounded">{item.year}</span>}
-              </div>
-              {item.author && <p className="text-gray-400 mb-3">BY {item.author}</p>}
-              {item.description && <p className="text-gray-300 leading-relaxed">{item.description}</p>}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Hero Section Component
-const HeroSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  
-  return (
-    <div ref={ref} className={`max-w-6xl mx-auto px-4 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <div className="flex flex-col md:flex-row items-center">
-        <div className="md:w-1/2 mb-8 md:mb-0">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Welcome to My World 🌍</h1>
-          <h2 className="text-3xl text-blue-400 mb-6">I'm Nilesh Jain / Arnaiya</h2>
-          <p className="text-xl mb-8">Research Associate at Yale University & Founder of multiple tech ventures including Pybooks and Bibby AI.</p>
-          <div className="flex space-x-4">
-            <button onClick={() => document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' })} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition">My Story</button>
-            <button onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })} className="bg-transparent hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-400 hover:border-transparent font-bold py-3 px-6 rounded-full transition">See My Work</button>
-          </div>
-        </div>
-        <div className="md:w-1/2 flex justify-center">
-          <div className="relative">
-            {/* Placeholder for profile image */}
-            <div className="w-64 h-64 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-4xl font-bold">NJ</div>
-            <div className="absolute -top-4 -right-4 bg-blue-600 rounded-full p-3">
-              <Briefcase size={24} />
-            </div>
-            <div className="absolute -bottom-4 -left-4 bg-green-600 rounded-full p-3">
-              <Globe size={24} />
-            </div>
-            <div className="absolute -bottom-4 -right-4 bg-purple-600 rounded-full p-3">
-              <Code size={24} />
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div className="mt-16">
-        <h3 className="text-2xl font-bold mb-6 text-center">What I'm Up To</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:transform hover:scale-105 transition">
-            <div className="text-blue-400 mb-4"><MapPin size={32} /></div>
-            <h4 className="text-xl font-bold mb-2">Yale University</h4>
-            <p>Working at Yale as a research associate 🎓</p>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:transform hover:scale-105 transition">
-            <div className="text-green-400 mb-4"><Briefcase size={32} /></div>
-            <h4 className="text-xl font-bold mb-2">The Residency</h4>
-            <p>Running The Residency (a hacker house) in Bangalore</p>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:transform hover:scale-105 transition">
-            <div className="text-purple-400 mb-4"><User size={32} /></div>
-            <h4 className="text-xl font-bold mb-2">Educational Consulting</h4>
-            <p>Mentoring on Topmate and Mentorcruise and Consulting Founders</p>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:transform hover:scale-105 transition">
-            <div className="text-orange-400 mb-4"><MessageSquare size={32} /></div>
-            <h4 className="text-xl font-bold mb-2">BibbyAI & Upcourse.io</h4>
-            <p>Working on BibbyAI and Upcourse.io, pushing the boundaries of AI and education</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Journey Section Component
-const JourneySection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  
-  const journeyItems = [
-    {
-      year: "Ages 1-17",
-      title: "The Beginning",
-      description: "I was just a regular kid without early exposure to coding or tech. Late by today's standards, I began my programming journey at 17, sparking a lifelong passion for learning."
-    },
-    {
-      year: "The Education Phase",
-      title: "Self-taught Explorer",
-      description: "After failing 12th grade, I bounced back by teaching myself through platforms like edX, Udacity, and Coursera when they were just starting! I pursued internships and built my tech skills independently."
-    },
-    {
-      year: "The Bangalore Years",
-      title: "Tech Community Immersion",
-      description: "Bangalore became my second home, where I soaked up knowledge, collected swag, and ate a lot of free pizza at tech meetups. This period shaped my networking skills and technical foundation."
-    },
-    {
-      year: "Career Experiments",
-      title: "Professional Shapeshifter",
-      description: "I've held various roles – some successful, others not so much. From teaching to full-stack development, Android apps to data science, each experience shaped my path. I've also been fired and also quit one"
-    },
-    {
-      year: "South Africa",
-      title: "Teaching & Learning",
-      description: "I taught IB subjects to rich students for a semester in South Africa while pursuing my Master's degree, an experience that broadened my global perspective and reinforced my passion for education."
-    },
-    {
-      year: "Present Day",
-      title: "Founder & Researcher",
-      description: "Now at Yale as a research associate while running multiple tech ventures including Pybooks, Bibby AI, and others. Constantly seeking new challenges and ways to make an impact."
-    }
-  ];
-  
-  return (
-    <div ref={ref} className={`max-w-6xl mx-auto px-4 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <h2 className="text-4xl font-bold mb-2 text-center">My Journey 🚀</h2>
-      <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">A winding path of learning, failing, adapting, and growing</p>
-      
-      <div className="relative">
-        {/* Timeline line */}
-        <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-blue-500"></div>
-        
-        {/* Timeline items */}
-        {journeyItems.map((item, index) => (
-          <div key={index} className={`relative mb-12 ${index % 2 === 0 ? 'md:pr-10 md:text-right md:self-end' : 'md:pl-10 md:text-left md:self-start'} md:w-1/2 ${index % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'}`}>
-            <div className={`flex items-center mb-4 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-              <div className="absolute left-0 md:left-1/2 transform -translate-y-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-blue-600 border-4 border-gray-900"></div>
-              <span className="bg-blue-600 text-white py-1 px-3 rounded-full text-sm font-bold">{item.year}</span>
-            </div>
-            <div className={`bg-gray-800 bg-opacity-50 p-6 rounded-lg border-l-4 border-blue-500 ${index % 2 === 0 ? 'md:mr-6' : 'md:ml-6'}`}>
-              <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-              <p className="text-gray-300">{item.description}</p>
-            </div>
-          </div>
-        ))}
-      
-      
-      <div className="mt-16 text-center">
-        <h3 className="text-2xl font-bold mb-6">Things I Love 💡</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h4 className="text-xl font-bold mb-4 text-blue-400">Hobbies</h4>
-            <ul className="space-y-2">
-              <li className="flex items-center"><Star size={16} className="mr-2 text-blue-400" /> Yoga</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-blue-400" /> Reading</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-blue-400" /> AI Art</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-blue-400" /> Astronomy</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-blue-400" /> Public Speaking</li>
-            </ul>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h4 className="text-xl font-bold mb-4 text-green-400">Activities</h4>
-            <ul className="space-y-2">
-              <li className="flex items-center"><Star size={16} className="mr-2 text-green-400" /> Traveling (solo & with friends)</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-green-400" /> Mentoring</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-green-400" /> Volunteering</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-green-400" /> Cricket</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-green-400" /> Rafting</li>
-            </ul>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h4 className="text-xl font-bold mb-4 text-purple-400">Passions</h4>
-            <ul className="space-y-2">
-              <li className="flex items-center"><Star size={16} className="mr-2 text-purple-400" /> Teaching</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-purple-400" /> Content Creation</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-purple-400" /> Gift-Giving</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-purple-400" /> Cycling</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-purple-400" /> Learning new skills</li>
-            </ul>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h4 className="text-xl font-bold mb-4 text-orange-400">Interests</h4>
-            <ul className="space-y-2">
-              <li className="flex items-center"><Star size={16} className="mr-2 text-orange-400" /> Human Behavior</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-orange-400" /> Economics</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-orange-400" /> Neuroscience</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-orange-400" /> Education innovation</li>
-              <li className="flex items-center"><Star size={16} className="mr-2 text-orange-400" /> Cultural diversity</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-16 text-center">
-        <h3 className="text-2xl font-bold mb-6">Past Ventures 🚀</h3>
-        <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">A glimpse into my entrepreneurial and creative endeavors</p>
-        <div className="flex flex-wrap justify-center gap-8">
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h4 className="text-xl font-bold mb-4 text-blue-400">BuildawnLabs</h4>
-            <p className="text-gray-300">Computer assembly startup co-founded with Sagar Kotian.</p>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h4 className="text-xl font-bold mb-4 text-green-400">Airbnb Listing Improver</h4>
-            <p className="text-gray-300">Service for property owners to enhance their listings.</p>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg hover:bg-gray-700 transition">
-            <h4 className="text-xl font-bold mb-4 text-purple-400">NotSoHuman.AI</h4>
-            <p className="text-gray-300">Instagram account featuring math simulations and AI content.</p>
-          </div>
-        </div>
-      </div>
-      
-      <div className="mt-16 text-center">
-        <h3 className="text-2xl font-bold mb-6">Random Fun Facts 🎉</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg">
-            <p className="mb-0 flex items-start">
-              <Coffee className="mr-2 text-yellow-400 flex-shrink-0 mt-1" size={20} />
-              <span>I change accents based on where I am.</span>
-            </p>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg">
-            <p className="mb-0 flex items-start">
-              <Coffee className="mr-2 text-yellow-400 flex-shrink-0 mt-1" size={20} />
-              <span>I'm terrible at cooking but love gifting food to others.</span>
-            </p>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg">
-            <p className="mb-0 flex items-start">
-              <Coffee className="mr-2 text-yellow-400 flex-shrink-0 mt-1" size={20} />
-              <span>I was once scared to take my first flight – now I'm a serial conference traveler.</span>
-            </p>
-          </div>
-          <div className="bg-gray-800 bg-opacity-50 p-6 rounded-lg">
-            <p className="mb-0 flex items-start">
-              <Coffee className="mr-2 text-yellow-400 flex-shrink-0 mt-1" size={20} />
-              <span>I have stopped sugar completely for 30 days.</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-  );
-};
-
-
-// Projects Section Component
-const ProjectsSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  
-  const projects = [
-    {
-      title: "Upcourse.io",
-      link:"https://upcourse.io",
-      icon: <Lightbulb size={32} className="text-yellow-400" />,
-      description: "Interactive education labs to learn anything. A platform that transforms traditional educational content into interactive, hands-on learning experiences.",
-      tags: ["Education", "EdTech", "Interactive Learning"]
-    },
-    {
-      title: "Bibby AI",
-      link:"https://trybibby.com",
-      icon: <Briefcase size={32} className="text-red-400" />,
-      description: "Leveraging artificial intelligence to transform knowledge management and information retrieval in educational contexts.",
-      tags: ["AI", "Education", "Knowledge Management"]
-    },
-    {
-      title: "Pybooks.com",
-      link:"https://pybooks.com",
-      icon: <Code size={32} className="text-blue-400" />,
-      description: "Jupyter notebooks for teachers. Making computational tools accessible to educators with ready-to-use templates and resources.",
-      tags: ["EdTech", "Python", "Data Science"]
-    },
-    {
-      title: "CodeUpLab",
-      link:"https://codeuplab.com",
-      icon: <BookOpen size={32} className="text-green-400" />,
-      description: "Helping students learn programming and data science through structured, project-based curricula and personalized guidance.",
-      tags: ["Education", "Programming", "Mentoring"]
-    },
-    {
-      title: "Math Simulations",
-      link:"https://myjainism.com/beta-test/revisiondojo/2",
-      icon: <Feather size={32} className="text-purple-400" />,
-      description: "Math wisdom distilled. A curated collection of math concepts explained using a simulation tech I created",
-      tags: ["Knowledge", "Philosophy", "Wisdom"]
-    },
-    {
-      title: "1Kitchen POS",
-      link:"https://1kitchen.vercel.app/",
-      icon: <Coffee size={32} className="text-orange-400" />,
-      description: "Restaurant management software designed to streamline operations and enhance customer experience in food service establishments.",
-      tags: ["SaaS", "Hospitality", "Management"]
-    }
-  ];
-  
-  return (
-    <div ref={ref} className={`max-w-6xl mx-auto px-4 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <h2 className="text-4xl font-bold mb-2 text-center">My Projects</h2>
-      <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">A collection of ventures and initiatives I've founded or contributed to</p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project, index) => (
-          <a key={index} href={`${project.link}`} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl hover:transform hover:scale-105 transition duration-300">
-            <div className="p-6">
-              <div className="mb-4">
-                {project.icon}
-              </div>
-              <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-              <p className="text-gray-300 mb-6">{project.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag, tagIndex) => (
-                  <span key={tagIndex} className="bg-blue-900 bg-opacity-50 text-blue-300 text-xs px-3 py-1 rounded-full">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
-      
-      <div className="text-center mt-12">
-        <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-full transition">
-          View All Projects
-        </button>
-      </div>
-    </div>
-  );
-};
-
-// Writings Section Component
-const WritingsSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  
-  const articles = [
-    {
-      title: "The Multilingual Mind: Cognitive Benefits of Speaking Multiple Languages",
-      excerpt: "Exploring how my journey through Hindi, Marwari, Gujarati and other languages has shaped my neural pathways and cognitive flexibility.",
-      date: "February 15, 2025",
-      category: "Neuroscience"
-    },
-    {
-      title: "From Teaching to Tech: Lessons from a Non-Linear Career Path",
-      excerpt: "How embracing diverse professional experiences creates a unique perspective when approaching complex problems.",
-      date: "January 22, 2025",
-      category: "Career"
-    },
-    {
-      title: "Building Educational Tech That Actually Works",
-      excerpt: "Insights from creating Pybooks and other educational platforms that truly enhance learning outcomes.",
-      date: "December 10, 2024",
-      category: "EdTech"
-    },
-    {
-      title: "The Future of Learning: AI-Assisted Education",
-      excerpt: "How artificial intelligence is transforming the educational landscape and what it means for students and teachers.",
-      date: "November 5, 2024",
-      category: "AI & Education"
-    },
-    {
-      title: "Cultural Intelligence: What Working Across Continents Taught Me",
-      excerpt: "Reflections on adapting to different cultural contexts from Mumbai to Johannesburg to New Haven.",
-      date: "October 18, 2024",
-      category: "Culture"
-    }
-  ];
-  
-  return (
-    <div ref={ref} className={`max-w-6xl mx-auto px-4 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <h2 className="text-4xl font-bold mb-2 text-center">My Writings</h2>
-      <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">Thoughts, insights, and explorations on technology, education, and human behavior</p>
-      
-      <div className="space-y-8">
-        {articles.map((article, index) => (
-          <div key={index} className="bg-gray-800 bg-opacity-50 rounded-lg overflow-hidden hover:bg-gray-700 transition duration-300">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">{article.category}</span>
-                <span className="text-gray-400 text-sm">{article.date}</span>
-              </div>
-              <h3 className="text-2xl font-bold mb-2">{article.title}</h3>
-              <p className="text-gray-300 mb-4">{article.excerpt}</p>
-              <button className="text-blue-400 hover:text-blue-300 transition flex items-center">
-                Read more
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      <div className="text-center mt-12">
-        <button className="bg-transparent hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-400 hover:border-transparent font-bold py-3 px-8 rounded-full transition">
-          View All Articles
-        </button>
-      </div>
-    </div>
-  );
-};
-
-// Talks Section Component
-const TalksSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  
-  const talks = [
-    {
-      title: "The Future of AI in Education",
-      event: "EdTech Summit",
-      location: "Bangalore, India",
-      year: "2024",
-      description: "Discussed how artificial intelligence is revolutionizing educational methodologies and accessibility."
-    },
-    {
-      title: "Cross-Cultural Software Development",
-      event: "Developer Conference",
-      location: "Cape Town, South Africa",
-      year: "2023",
-      description: "Shared insights on building global teams and creating software that works across cultural contexts."
-    },
-    {
-      title: "From Student to Founder: The Entrepreneurship Journey",
-      event: "Yale University",
-      location: "New Haven, USA",
-      year: "2024",
-      description: "A personal account of transitioning from academic studies to building multiple tech ventures."
-    },
-    {
-      title: "Democratizing Data Science Education",
-      event: "DataCon Africa",
-      location: "Johannesburg, South Africa",
-      year: "2023",
-      description: "Presented strategies for making data science education more accessible to students from diverse backgrounds."
-    },
-    {
-      title: "Building Educational Technology for Global Impact",
-      event: "Global EdTech Forum",
-      location: "Virtual",
-      year: "2022",
-      description: "Explored how educational technology can bridge gaps in access to quality education worldwide."
-    }
-  ];
-  
-  return (
-    <div ref={ref} className={`max-w-6xl mx-auto px-4 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <h2 className="text-4xl font-bold mb-2 text-center">My Talks</h2>
-      <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">Conference presentations, keynotes, and workshops I've delivered around the world</p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {talks.map((talk, index) => (
-          <div key={index} className="bg-gray-800 bg-opacity-50 rounded-lg p-6 hover:bg-gray-700 transition duration-300">
-            <div className="flex justify-between items-start mb-4">
-              <MessageSquare size={24} className="text-purple-400 flex-shrink-0" />
-              <span className="bg-purple-900 bg-opacity-50 text-purple-300 text-xs px-3 py-1 rounded-full">{talk.year}</span>
-            </div>
-            <h3 className="text-2xl font-bold mb-2">{talk.title}</h3>
-            <div className="flex items-center mb-4 text-gray-400">
-              <span className="mr-4">{talk.event}</span>
-              <span>{talk.location}</span>
-            </div>
-            <p className="text-gray-300">{talk.description}</p>
-          </div>
-        ))}
-      </div>
-      
-      <div className="text-center mt-12">
-        <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition">
-          View All Presentations
-        </button>
-      </div>
-    </div>
-  );
-};
-
-// Recommendations Section Component
-const RecommendationsSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  
-  const tabs = [
-    { id: 'books', label: 'Books', icon: <BookMarked size={20} /> },
-    { id: 'movies', label: 'Movies', icon: <Video size={20} /> }
-  ];
-  
-  const [activeTab, setActiveTab] = useState('books');
-  
-  const books = [
-    {
-      title: "Thinking, Fast and Slow",
-      author: "Daniel Kahneman",
-      description: "A fascinating exploration of two systems that drive the way we think. Changed how I understand decision-making and cognitive biases.",
-      genre: "Psychology"
-    },
-    {
-      title: "Sapiens: A Brief History of Humankind",
-      author: "Yuval Noah Harari",
-      description: "This book transformed my understanding of human history and our place in the world. Essential reading for anyone curious about humanity's journey.",
-      genre: "History"
-    },
-    {
-      title: "Zero to One",
-      author: "Peter Thiel",
-      description: "The best book on startups and innovation I've read. Thiel's contrarian thinking pushed me to reconsider conventional wisdom about business.",
-      genre: "Business"
-    },
-    {
-      title: "The Brain: The Story of You",
-      author: "David Eagleman",
-      description: "An accessible yet profound look at neuroscience that inspired my interest in how the brain shapes our experiences and reality.",
-      genre: "Neuroscience"
-    },
-    {
-      title: "Atomic Habits",
-      author: "James Clear",
-      description: "Practical strategies for forming good habits and breaking bad ones. I've applied these principles to transform my productivity and learning.",
-      genre: "Self-Improvement"
-    }
-  ];
-  
-  const movies = [
-    {
-      title: "The Social Network",
-      director: "David Fincher",
-      description: "More than just the Facebook origin story - it's a masterclass in ambition, betrayal, and the birth of the modern tech industry.",
-      genre: "Drama"
-    },
-    {
-      title: "Taare Zameen Par",
-      director: "Aamir Khan",
-      description: "A beautiful film about neurodiversity and the power of empathetic teaching. Makes me emotional every time I watch it.",
-      genre: "Drama"
-    },
-    {
-      title: "Arrival",
-      director: "Denis Villeneuve",
-      description: "A thought-provoking exploration of language, time, and communication. The kind of sci-fi that makes you see the world differently.",
-      genre: "Science Fiction"
-    },
-    {
-      title: "The Pursuit of Happyness",
-      director: "Gabriele Muccino",
-      description: "An inspiring true story of perseverance and determination. Reminds me that entrepreneurship is about resilience as much as innovation.",
-      genre: "Biographical Drama"
-    },
-    {
-      title: "3 Idiots",
-      director: "Rajkumar Hirani",
-      description: "A film that critiques traditional education while celebrating curiosity and passion. Has shaped my views on educational reform.",
-      genre: "Comedy-Drama"
-    }
-  ];
-  
-  return (
-    <div ref={ref} className={`max-w-6xl mx-auto px-4 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <h2 className="text-4xl font-bold mb-2 text-center">My Recommendations</h2>
-      <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">Books and movies that have shaped my thinking and perspectives</p>
-      
-      <div className="flex justify-center mb-8">
-        <div className="inline-flex bg-gray-800 rounded-full p-1">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center px-6 py-2 rounded-full transition ${
-                activeTab === tab.id
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              <span className="mr-2">{tab.icon}</span>
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {activeTab === 'books' &&
-          books.map((book, index) => (
-            <div key={index} className="bg-gray-800 bg-opacity-50 rounded-lg p-6 hover:bg-gray-700 transition duration-300">
-              <div className="flex justify-between items-start mb-4">
-                <BookMarked size={24} className="text-blue-400" />
-                <span className="bg-blue-900 bg-opacity-50 text-blue-300 text-xs px-3 py-1 rounded-full">{book.genre}</span>
-              </div>
-              <h3 className="text-xl font-bold mb-1">{book.title}</h3>
-              <p className="text-gray-400 text-sm mb-4">by {book.author}</p>
-              <p className="text-gray-300">{book.description}</p>
-            </div>
-          ))}
-        
-        {activeTab === 'movies' &&
-          movies.map((movie, index) => (
-            <div key={index} className="bg-gray-800 bg-opacity-50 rounded-lg p-6 hover:bg-gray-700 transition duration-300">
-              <div className="flex justify-between items-start mb-4">
-                <Video size={24} className="text-red-400" />
-                <span className="bg-red-900 bg-opacity-50 text-red-300 text-xs px-3 py-1 rounded-full">{movie.genre}</span>
-              </div>
-              <h3 className="text-xl font-bold mb-1">{movie.title}</h3>
-              <p className="text-gray-400 text-sm mb-4">Directed by {movie.director}</p>
-              <p className="text-gray-300">{movie.description}</p>
-            </div>
-          ))}
-      </div>
-    </div>
-  );
-};
-
-// Dating Section Component
-const DatingSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  
-  const reasons = [
-    {
-      title: "The Multilingual Nomad",
-      icon: <Globe className="text-blue-600" size={48} />,
-      content: [
-        "Mumbai, Bangalore, Ahmedabad, Johannesburg, Cape Town, and now the USA - my passport is basically a world tour diary.",
-        "Language skills: Hindi, Marwari, Gujarati, broken Marathi, a sprinkle of Kannada, and enough Spanish to order tapas. Think United Nations, but with more chai.",
-        "Neuroscience fun fact: Each language you learn creates new neural pathways, essentially giving your brain a cognitive workout. My brain's basically an Olympic gymnast at this point."
-      ],
-      anecdote: "Once tried explaining quantum physics in Marwari. Spoiler: It didn't go well, but hey, at least my brain tried!"
-    },
-    {
-      title: "Professional Shapeshifter",
-      icon: <Briefcase className="text-purple-600" size={48} />,
-      content: [
-        "Resumes are for amateurs. I prefer to call my career path a 'professional adventure'.",
-        "From teaching to full-stack development, Android apps to data science, and now a researcher at Yale University.",
-        "Marwari business mindset: Always hustling, even when the 'hustle' looks like deep neuroscience research."
-      ],
-      anecdote: "My LinkedIn profile looks like I'm either incredibly talented or suffering from severe career ADHD. Why choose?"
-    },
-    {
-      title: "The Bookworm Surfer",
-      icon: <BookOpen className="text-green-600" size={48} />,
-      content: [
-        "Book collector extraordinaire. Some I read, some I collect, some exist in a quantum state of 'maybe later'.",
-        "Recent passion: Surfing! Turns out riding waves is surprisingly similar to navigating my multi-hyphenate career.",
-        "Brain research tip: Reading is like cross-training for your neural networks. Each book is basically a software update for your mind."
-      ],
-      anecdote: "My bookshelf is less a library, more a 'potential knowledge museum'."
-    },
-    {
-      title: "Cultural Curator",
-      icon: <Music className="text-red-600" size={48} />,
-      content: [
-        "Ukulele player (yes, really). Data visualization artist. South Indian dance enthusiast.",
-        "Can wake up at 4:30 AM for cricket, but will also cry during 'Taare Zameen Par'.",
-        "Emotional range: From analyzing complex datasets to getting misty-eyed during movies about human connections."
-      ],
-      anecdote: "My playlist is a wild mix of cricket commentary, neuroscience podcasts, and Ganpati songs. Diversity is my middle name."
-    },
-    {
-      title: "The Real Deal",
-      icon: <Heart className="text-pink-600" size={48} />,
-      content: [
-        "Looking for a partner who's curious, kind, and has ambitions beyond social media validation.",
-        "One relationship, two one-sided loves, multiple heartbreaks - but still believing in connection.",
-        "Virgo. Dog person. Lover of rain, Mumbai's chaos, and meaningful conversations."
-      ],
-      anecdote: "Not seeking perfection, just someone who finds my neuroscience jokes funny and doesn't mind my incomplete book collection."
-    }
-  ];
-  
-  const [activeReason, setActiveReason] = useState(0);
-  
-  const nextReason = () => {
-    setActiveReason((prev) => (prev + 1) % reasons.length);
-  };
-  
-  const prevReason = () => {
-    setActiveReason((prev) => (prev - 1 + reasons.length) % reasons.length);
-  };
-  
-  return (
-    <div ref={ref} className={`max-w-6xl mx-auto px-4 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <h2 className="text-4xl font-bold mb-2 text-center">Why You Should Date Me</h2>
-      <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto">A slightly tongue-in-cheek but mostly honest pitch</p>
-      
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl">
-          <div className="p-6">
-            <div className="flex justify-center mb-6">
-              {reasons[activeReason].icon}
-            </div>
-            
-            <h3 className="text-3xl font-bold text-center mb-6">
-              {reasons[activeReason].title}
-            </h3>
-            
-            {reasons[activeReason].content.map((paragraph, index) => (
-              <p key={index} className="mb-4 text-lg text-gray-300">
-                {paragraph}
-              </p>
-            ))}
-            
-            <div className="italic text-gray-400 mt-8 border-l-4 border-blue-500 pl-4">
-              💬 Anecdote: {reasons[activeReason].anecdote}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-between mt-6">
-          <button onClick={prevReason} className="bg-transparent hover:bg-gray-700 text-white font-bold py-2 px-6 border border-gray-600 rounded-full transition">
-            Previous
-          </button>
-          <button onClick={nextReason} className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-full transition">
-            Next
-          </button>
-        </div>
-
-        <div className="flex justify-center space-x-2 mt-6">
-          {reasons.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveReason(index)}
-              className={`w-3 h-3 rounded-full ${
-                activeReason === index ? 'bg-pink-600' : 'bg-gray-600'
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default PersonalWebsite;
+    </main>
+  )
+}
