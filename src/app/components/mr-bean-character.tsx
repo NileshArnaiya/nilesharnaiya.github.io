@@ -1,12 +1,23 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useMemo } from "react"
 import { motion, useAnimation } from "framer-motion"
 import Image from "next/image"
 
 export default function MrBeanCharacter() {
   const controls = useAnimation()
   const characterRef = useRef<HTMLDivElement>(null)
+
+  const randomObjects = useMemo(() => 
+    Array.from({ length: 12 }, (_, i) => ({
+      id: i,
+      x: typeof window !== "undefined" ? Math.random() * window.innerWidth * 0.8 : Math.random() * 800,
+      y: Math.random() * 200 + 100,
+      type: ['📱', '🎸', '🎨', '📚', '🎮', '⚽', '🎯', '🎪'][Math.floor(Math.random() * 8)],
+      delay: Math.random() * 3,
+      duration: Math.random() * 2 + 3,
+    }))
+  , [])
 
   useEffect(() => {
     const animateBean = async () => {
@@ -34,7 +45,7 @@ export default function MrBeanCharacter() {
 
         // Walk out
         await controls.start({
-          x: window.innerWidth + 100,
+          x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000,
           transition: { duration: 5, ease: "linear" },
         })
 

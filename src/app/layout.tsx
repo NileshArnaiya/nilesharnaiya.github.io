@@ -1,20 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Poppins, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import { Inter } from "next/font/google"
 import { ThemeProvider } from "./components/theme-provider";
 
-const inter = Inter({ subsets: ["latin"] })
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({ 
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({ 
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({ 
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -30,14 +42,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={inter.className}>
+        className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem={true}
           disableTransitionOnChange
         >
-          <div className="min-h-screen bg-background text-foreground">
+          <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 text-foreground">
             {children}
           </div>
         </ThemeProvider>

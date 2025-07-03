@@ -1,191 +1,170 @@
 "use client"
 
-import { useRef, useState } from "react"
-import { motion, useInView } from "framer-motion"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
+import { useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import Image from "next/image"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
 import { Badge } from "./ui/badge"
-import { Button } from "./ui/button"
-
-import { BookOpen, MessageSquare, ExternalLink } from "lucide-react"
+import { ExternalLink, BookOpen, MessageSquare } from "lucide-react"
+import Link from "next/link"
 
 export default function WritingsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const [activeTab, setActiveTab] = useState("writings")
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  })
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  }
+  // Parallax effects
+  const cloudsY = useTransform(scrollYProgress, [0, 1], [0, -150])
+  const contentY = useTransform(scrollYProgress, [0.1, 0.3], [50, 0])
 
   const writings = [
     {
-      title: "My Thoughts on Substack",
-      description:
-        "I regularly share my thoughts and insights on my Substack blog, covering topics from education to technology",
-      date: "Ongoing",
-      tags: ["Blog", "Thoughts", "Education"],
-      link: "#",
-    },
-    {
-      title: "Twitter Threads",
-      description:
-        "I share bite-sized wisdom and observations on Twitter, connecting with a community of like-minded thinkers",
-      date: "Ongoing",
-      tags: ["Social Media", "Thoughts", "Community"],
-      link: "#",
-    },
-    {
-      title: "The Power of Self-Education",
-      description: "How I taught myself programming and built a career without traditional credentials",
-      date: "June 15, 2023",
-      tags: ["Education", "Programming", "Career"],
-      link: "#",
-    },
-    {
       title: "From Failure to Yale: My Unconventional Path",
-      description: "The story of how failing 12th grade led me to a research position at Yale University",
-      date: "April 3, 2023",
-      tags: ["Personal Growth", "Academia", "Resilience"],
-      link: "#",
+      description: "A detailed account of my journey from failing 12th grade to conducting research at Yale University.",
+      link: "https://medium.com/@nilesharnaiya/from-failure-to-yale",
+      date: "March 2024",
+      tags: ["Personal Growth", "Education", "Research"]
     },
     {
-      title: "Building Educational Tools for the Next Generation",
-      description: "Insights from creating Pybooks and other educational platforms",
-      date: "February 22, 2023",
-      tags: ["EdTech", "Entrepreneurship", "Teaching"],
-      link: "#",
-    },
+      title: "Building TryBibby: AI Research Assistant",
+      description: "The story behind creating TryBibby.com, an AI-powered research tool that helps academics and students streamline their research process.",
+      link: "https://medium.com/@nilesharnaiya/building-trybibby",
+      date: "February 2024",
+      tags: ["AI", "Entrepreneurship", "EdTech"]
+    }
   ]
 
-  const talks = [
+  const socials = [
     {
-      title: "The Future of Interactive Education",
-      description: "Keynote at EdTech Summit 2023 discussing how interactive tools are transforming learning",
-      date: "September 10, 2023",
-      tags: ["Education", "Technology", "Future"],
-      link: "#",
+      name: "Substack",
+      handle: "niloferai",
+      link: "https://niloferai.substack.com/"
     },
     {
-      title: "Democratizing AI Education in Africa",
-      description: "Panel discussion at IndabaX on making AI education accessible across the continent",
-      date: "July 5, 2023",
-      tags: ["AI", "Africa", "Education"],
-      link: "#",
+      name: "Twitter",
+      handle: "@NileshArnaiya",
+      link: "https://twitter.com/NileshArnaiya"
     },
     {
-      title: "From Self-Taught to Self-Made",
-      description: "TEDx talk on leveraging self-education to build a career and businesses",
-      date: "March 18, 2023",
-      tags: ["Motivation", "Career", "Education"],
-      link: "#",
+      name: "LinkedIn",
+      handle: "NileshArnaiya",
+      link: "https://linkedin.com/in/NileshArnaiya"
     },
+    {
+      name: "YouTube",
+      handle: "Nilesh Arnaiya",
+      link: "https://www.youtube.com/watch?v=AEjKC8LDSAE&list=PLpdNpcGdAWNT2uYORCUfLisE7iq5Z10cg"
+    }
   ]
 
   return (
-    <div className="container mx-auto px-4">
-      <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        variants={containerVariants}
-        className="max-w-4xl mx-auto"
-      >
-        <motion.div variants={itemVariants} className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Writings & Talks</h2>
-          <p className="text-lg text-gray-700">
-            Sharing knowledge, experiences, and insights through articles and presentations
-          </p>
-        </motion.div>
+    <div ref={containerRef} className="min-h-screen w-full overflow-hidden relative py-20">
+      {/* Sky background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#90e0ef] to-[#bde0fe]" />
 
-        <motion.div variants={itemVariants}>
-          <Tabs defaultValue="writings" value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
+      {/* Clouds background */}
+      <motion.div className="absolute top-0 left-0 w-full h-[80%]" style={{ y: cloudsY }}>
+        <Image
+          src="/nilesharnaiya.github.io/placeholder.svg"
+          alt="Clouds Background"
+          width={1920}
+          height={800}
+          className="w-full h-full object-cover opacity-70"
+        />
+      </motion.div>
+
+      {/* Content */}
+      <div className="container mx-auto px-4 relative z-10 pt-[10vh]">
+        <motion.div style={{ y: contentY }} className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#2b2d42]">
+              Writings & Talks
+            </h2>
+            <p className="text-lg text-[#2b2d42]">
+              Sharing knowledge, experiences, and insights through articles and social media
+            </p>
+          </div>
+
+          <Tabs defaultValue="writings" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-8 bg-white/50 backdrop-blur-sm">
               <TabsTrigger value="writings" className="flex items-center gap-2">
                 <BookOpen className="h-4 w-4" />
                 Writings
               </TabsTrigger>
-              <TabsTrigger value="talks" className="flex items-center gap-2">
+              <TabsTrigger value="social" className="flex items-center gap-2">
                 <MessageSquare className="h-4 w-4" />
-                Talks
+                Connect
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="writings" className="space-y-6">
-              {writings.map((item, index) => (
-                <Card key={index}>
-                  <CardHeader>
-                    <CardTitle>{item.title}</CardTitle>
-                    <CardDescription>{item.date}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{item.description}</p>
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {item.tags.map((tag, tagIndex) => (
-                        <Badge key={tagIndex} variant="outline">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={item.link} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Read Article
-                      </a>
-                    </Button>
-                  </CardFooter>
-                </Card>
+              {writings.map((writing, index) => (
+                <Link key={index} href={writing.link} target="_blank" className="block group">
+                  <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm">
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle className="text-xl font-bold group-hover:text-blue-600">
+                            {writing.title}
+                          </CardTitle>
+                          <CardDescription className="mt-2">
+                            {writing.description}
+                          </CardDescription>
+                        </div>
+                        <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-blue-600" />
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2">
+                        {writing.tags.map((tag, i) => (
+                          <Badge key={i} variant="secondary" className="bg-blue-100 text-blue-700">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                      <div className="mt-4 text-sm text-gray-500">
+                        {writing.date}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </TabsContent>
 
-            <TabsContent value="talks" className="space-y-6">
-              {talks.map((item, index) => (
-                <Card key={index}>
-                  <CardHeader>
-                    <CardTitle>{item.title}</CardTitle>
-                    <CardDescription>{item.date}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{item.description}</p>
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {item.tags.map((tag, tagIndex) => (
-                        <Badge key={tagIndex} variant="outline">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={item.link} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Watch Talk
-                      </a>
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
+            <TabsContent value="social" className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {socials.map((social, index) => (
+                  <Link key={index} href={social.link} target="_blank" className="block group">
+                    <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm">
+                      <CardContent className="pt-6">
+                        <div className="flex items-center gap-4">
+                          <div>
+                            <h3 className="font-semibold text-lg text-gray-900">{social.name}</h3>
+                            <p className="text-gray-600">{social.handle}</p>
+                          </div>
+                          <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-blue-600 ml-auto" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
         </motion.div>
-      </motion.div>
+      </div>
+
+      {/* Flying paper animation */}
+      <div className="absolute top-[40%] right-[30%] animate-float">
+        <div className="w-8 h-10 bg-white transform rotate-12"></div>
+      </div>
+      <div className="absolute top-[60%] left-[25%] animate-float-delayed">
+        <div className="w-6 h-8 bg-white transform -rotate-6"></div>
+      </div>
     </div>
   )
 }

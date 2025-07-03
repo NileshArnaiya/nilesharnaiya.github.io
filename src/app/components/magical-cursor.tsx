@@ -8,6 +8,8 @@ export default function MagicalCursor() {
   const [cursorVariant, setCursorVariant] = useState("default")
 
   useEffect(() => {
+    if (typeof window === "undefined") return
+    
     const mouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: e.clientX,

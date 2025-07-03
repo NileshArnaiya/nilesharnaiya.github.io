@@ -19,49 +19,49 @@ export default function WalkingCharacter() {
       id: "home",
       path: [
         { x: -100, y: 0 },
-        { x: window.innerWidth + 100, y: 0 },
+        { x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, y: 0 },
       ],
     },
     {
       id: "about",
       path: [
         { x: -100, y: 0 },
-        { x: window.innerWidth + 100, y: 0 },
+        { x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, y: 0 },
       ],
     },
     {
       id: "projects",
       path: [
         { x: -100, y: 0 },
-        { x: window.innerWidth + 100, y: 0 },
+        { x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, y: 0 },
       ],
     },
     {
       id: "journey",
       path: [
         { x: -100, y: 0 },
-        { x: window.innerWidth + 100, y: 0 },
+        { x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, y: 0 },
       ],
     },
     {
       id: "writings",
       path: [
         { x: -100, y: 0 },
-        { x: window.innerWidth + 100, y: 0 },
+        { x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, y: 0 },
       ],
     },
     {
       id: "recommendations",
       path: [
         { x: -100, y: 0 },
-        { x: window.innerWidth + 100, y: 0 },
+        { x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, y: 0 },
       ],
     },
     {
       id: "dateMe",
       path: [
         { x: -100, y: 0 },
-        { x: window.innerWidth + 100, y: 0 },
+        { x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, y: 0 },
       ],
     },
   ]

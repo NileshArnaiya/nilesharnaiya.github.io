@@ -2,8 +2,9 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import { Globe, Briefcase, Heart } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
+import { Badge } from "./ui/badge"
+import { Sparkles, Heart, BookOpen, Code2, Briefcase, Users, Trophy, Rocket, Brain, Star, ExternalLink } from "lucide-react"
 
 export default function FloatingIsland() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -13,185 +14,302 @@ export default function FloatingIsland() {
     offset: ["start end", "end start"],
   })
 
-  // Parallax effects
   const islandY = useTransform(scrollYProgress, [0, 1], [100, -100])
-  const contentOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1])
-  const contentY = useTransform(scrollYProgress, [0.1, 0.3], [50, 0])
+  const cloudY = useTransform(scrollYProgress, [0, 1], [50, -150])
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
+
+  const aboutItems = [
+    {
+      icon: <Brain className="h-6 w-6 text-blue-500" />,
+      title: "AI Researcher at Yale",
+      description: "Conducting groundbreaking research in AI, neuroscience, and human-computer interaction at one of the world's leading universities.",
+      tags: ["AI", "Neuroscience", "Yale", "Research"],
+      highlight: "Currently at Yale University",
+    },
+    {
+      icon: <Rocket className="h-6 w-6 text-green-500" />,
+      title: "Serial Entrepreneur",
+      description: "Successfully sold upcourse.io to a Y Combinator company. Currently building next-generation tools for researchers including trybibby.com and Bibby robotics.",
+      tags: ["YC Exit", "Startups", "AI Tools", "Robotics"],
+      highlight: "Sold to YC Company",
+      links: [
+        { label: "TryBibby.com", url: "https://trybibby.com" },
+        { label: "Bibby Robotics", url: "https://dimagai.com/landing" }
+      ]
+    },
+    {
+      icon: <Users className="h-6 w-6 text-purple-500" />,
+      title: "Experienced Mentor",
+      description: "6+ years of mentoring aspiring entrepreneurs and developers at MentorCruise, helping hundreds achieve their goals in tech and business.",
+      tags: ["MentorCruise", "6+ Years", "Leadership", "Growth"],
+      highlight: "6 Years at MentorCruise",
+    },
+    {
+      icon: <BookOpen className="h-6 w-6 text-pink-500" />,
+      title: "Avid Reader & Educator",
+      description: "Passionate about continuous learning through books and sharing knowledge. Creating educational content and teaching the next generation of innovators.",
+      tags: ["Reading", "Teaching", "Content Creation", "Learning"],
+      highlight: "Book Lover",
+    },
+    {
+      icon: <Code2 className="h-6 w-6 text-indigo-500" />,
+      title: "Builder & Creator",
+      description: "Previously built successful platforms like Buildawn.com and codeuplab.com. Passionate about creating tools that bridge technology and human needs.",
+      tags: ["Full-Stack", "Product", "Innovation", "Tech"],
+      highlight: "Proven Track Record",
+    },
+    {
+      icon: <Heart className="h-6 w-6 text-red-500" />,
+      title: "Community Leader",
+      description: "Active in tech communities like The Residency and Imbizo.africa. Organized IndabaX events and believes in the power of collaborative learning.",
+      tags: ["Community", "Events", "Collaboration", "Impact"],
+      highlight: "Community Builder",
+    },
+  ]
+
+  const achievements = [
+    { icon: <Trophy className="h-5 w-5" />, text: "Yale Researcher", color: "text-blue-600" },
+    { icon: <Star className="h-5 w-5" />, text: "YC Company Exit", color: "text-green-600" },
+    { icon: <Users className="h-5 w-5" />, text: "6+ Year Mentor", color: "text-purple-600" },
+    { icon: <Rocket className="h-5 w-5" />, text: "Multiple Startups", color: "text-pink-600" },
+  ]
 
   return (
-    <div ref={containerRef} className="min-h-screen w-full overflow-hidden relative py-20">
-      {/* Sky background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#e6f7ff] to-[#caf0f8]" />
+    <div ref={containerRef} className="min-h-screen w-full relative overflow-hidden">
+      {/* Enhanced gradient background */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100"
+        animate={{
+          background: [
+            "linear-gradient(135deg, #e0e7ff, #faf5ff, #fdf2f8)",
+            "linear-gradient(135deg, #ddd6fe, #f3e8ff, #fce7f3)",
+            "linear-gradient(135deg, #e0e7ff, #faf5ff, #fdf2f8)",
+          ],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
 
-      {/* Clouds - using SVG instead of placeholder images */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none">
-        <motion.g style={{ y: useTransform(scrollYProgress, [0, 1], [0, -150]) }}>
-          <ellipse cx="20%" cy="20%" rx="100" ry="50" fill="white" opacity="0.8" />
-        </motion.g>
-        <motion.g style={{ y: useTransform(scrollYProgress, [0, 1], [50, -100]) }}>
-          <ellipse cx="80%" cy="40%" rx="90" ry="45" fill="white" opacity="0.8" />
-        </motion.g>
-      </svg>
-
-      {/* Floating island - using SVG instead of placeholder image */}
+      {/* Floating clouds */}
       <motion.div
-        className="absolute left-1/2 transform -translate-x-1/2 w-[90%] max-w-[1200px]"
-        style={{ y: islandY }}
+        className="absolute inset-0 pointer-events-none"
+        style={{ y: cloudY }}
       >
-        <svg width="100%" height="300" viewBox="0 0 1200 300" preserveAspectRatio="none">
-          {/* Island base */}
-          <ellipse cx="600" cy="150" rx="500" ry="100" fill="#90be6d" />
-
-          {/* Island top */}
-          <ellipse cx="600" cy="120" rx="480" ry="90" fill="#43aa8b" />
-
-          {/* Trees */}
-          <g transform="translate(300, 50)">
-            <rect x="-5" y="0" width="10" height="30" fill="#774936" />
-            <polygon points="-20,30 0,-10 20,30" fill="#2d6a4f" />
-            <polygon points="-15,15 0,-20 15,15" fill="#40916c" />
-          </g>
-
-          <g transform="translate(800, 70)">
-            <rect x="-5" y="0" width="10" height="30" fill="#774936" />
-            <polygon points="-20,30 0,-10 20,30" fill="#2d6a4f" />
-            <polygon points="-15,15 0,-20 15,15" fill="#40916c" />
-          </g>
-
-          <g transform="translate(500, 40)">
-            <rect x="-7" y="0" width="14" height="40" fill="#774936" />
-            <polygon points="-30,40 0,-15 30,40" fill="#2d6a4f" />
-            <polygon points="-20,20 0,-30 20,20" fill="#40916c" />
-          </g>
-        </svg>
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-white/40 rounded-full backdrop-blur-sm"
+            style={{
+              width: Math.random() * 100 + 50,
+              height: Math.random() * 40 + 30,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              x: [0, 30, 0],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: Math.random() * 20 + 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 5,
+            }}
+          />
+        ))}
       </motion.div>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 relative z-10 pt-[20vh]">
-        <motion.div style={{ opacity: contentOpacity, y: contentY }} className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#2b2d42] mb-4">About Me</h2>
-            <p className="text-lg text-[#2b2d42]">
-              Currently at Yale doing neuroscience and building TryBibby.com (Bibby AI)
+      {/* Main content container */}
+      <div className="relative z-10 container mx-auto px-6 py-20 lg:py-32">
+        {/* Animated title */}
+        <motion.div
+          className="text-center mb-16"
+          style={{ opacity: titleOpacity }}
+        >
+          <motion.h2
+            className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+              About Me
+            </span>
+          </motion.h2>
+          
+          {/* Achievement badges */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-4 mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            {achievements.map((achievement, index) => (
+              <motion.div
+                key={index}
+                className="glass px-4 py-2 rounded-full flex items-center space-x-2 border border-white/30"
+                whileHover={{ scale: 1.05, y: -2 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <span className={achievement.color}>
+                  {achievement.icon}
+                </span>
+                <span className="text-sm font-medium text-gray-700">{achievement.text}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="flex items-center justify-center space-x-2"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <Sparkles className="h-6 w-6 text-purple-500" />
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
+              Exploring the intersection of AI, research, and entrepreneurship while building tools that empower the next generation of innovators
             </p>
-          </div>
+            <Sparkles className="h-6 w-6 text-pink-500" />
+          </motion.div>
+        </motion.div>
 
-          <div className="grid gap-8">
-            <Card className="bg-white/80 backdrop-blur-sm border-[#83c5be]">
-              <CardHeader className="bg-[#83c5be]/20">
-                <CardTitle className="flex items-center gap-2 text-[#2b2d42]">
-                  <Briefcase className="h-6 w-6 text-[#2b2d42]" />
-                  What I'm Up To
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <ul className="space-y-3 list-disc pl-5 text-[#2b2d42]">
-                <li>Podcasting - https://calendly.com/nilesharnaiya</li>
-                  <li>Working on Trybibby.com</li>
-                  <li>Working on pybooks.com</li>
-                  <li>Working on mathvideo.ai - https://v0-math-video-landing-page.vercel.app/</li> 
-                  <li>Working on upcourse.io</li>
-                  
-                  <li>Previously built Buildawn.com, codeuplab.com</li>
-                  <li>Previously helped organize IndabaX, part of communities like The Residency and Imbizo.africa</li>
-                  <li>Creating Mr. Bean-inspired 3blue1brown coding tutorials on instagram and youtube for fun</li>
-                </ul>
-              </CardContent>
-            </Card>
+        {/* Enhanced floating cards */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10"
+          style={{ y: islandY }}
+        >
+          {aboutItems.slice(0, 3).map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <Card className="h-full bg-white/95 backdrop-blur-sm border border-purple-200 hover:border-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl">
+                <CardHeader className="pb-4">
+                  <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center mb-4">
+                    {item.icon}
+                  </div>
+                  <div className="space-y-1">
+                    <CardTitle className="text-xl font-bold text-gray-800">{item.title}</CardTitle>
+                    {item.highlight && (
+                      <div className="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-sm font-medium text-purple-800">
+                        {item.highlight}
+                      </div>
+                    )}
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">{item.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {item.tags.map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  {item.links && (
+                    <div className="mt-4 space-y-2">
+                      {item.links.map((link, linkIndex) => (
+                        <a
+                          key={linkIndex}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center text-sm text-purple-600 hover:text-purple-800 transition-colors"
+                        >
+                          {link.label}
+                          <ExternalLink className="ml-1 h-3 w-3" />
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
 
-            <Card className="bg-white/80 backdrop-blur-sm border-[#83c5be]">
-              <CardHeader className="bg-[#83c5be]/20">
-                <CardTitle className="flex items-center gap-2 text-[#2b2d42]">
-                  <Globe className="h-6 w-6 text-[#2b2d42]" />
-                  Currently Building
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <ul className="space-y-3 list-disc pl-5 text-[#2b2d42]">
-                <li>
-                    <strong>Trybibby.com</strong> – Cursor for writing research 
-                  </li>
-
-                  <li>
-                    <strong>Upcourse.io</strong> – Interactive education labs to learn anything
-                  </li>
-                  <li>
-                    <strong>Pybooks.com</strong> – Jupyter notebooks for teachers
-                  </li>
-                  <li>
-                    <strong>Mathvideo.ai</strong> – Create 3blue1brown style animated videos 
-                  </li>
-                  <li>
-                    <strong>CodeUpLab</strong> – Helping students learn programming and data science
-                  </li>
-                  <li>
-                    <strong>NavalNow</strong> – Naval Ravikant's wisdom distilled
-                  </li>
-                  <li>
-                    <strong>1Kitchen POS</strong> – Restaurant management software
-                  </li>
-                
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/80 backdrop-blur-sm border-[#83c5be]">
-              <CardHeader className="bg-[#83c5be]/20">
-                <CardTitle className="flex items-center gap-2 text-[#2b2d42]">
-                  <Heart className="h-6 w-6 text-[#2b2d42]" />
-                  Things I Love
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[#2b2d42]">
-                  <div>
-                    <h4 className="font-medium mb-2">Hobbies</h4>
-                    <ul className="list-disc pl-5 space-y-1">
-                      <li>Yoga</li>
-                      <li>Reading</li>
-                      <li>AI Art</li>
-                      <li>Astronomy</li>
-                      <li>Public Speaking</li>
-                      <li>Walking</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Activities</h4>
-                    <ul className="list-disc pl-5 space-y-1">
-                      <li>Traveling anywhere(solo & with friends)</li>
-                      <li>Mentoring</li>
-                      <li>Volunteering</li>
-                      <li>Sending long emails</li>
-                      <li>Surfing</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Passions</h4>
-                    <ul className="list-disc pl-5 space-y-1">
-                      <li>Teaching</li>
-                      <li>Content Creation</li>
-                      <li>Gift-Giving</li>
-                      <li>Cycling</li>
-                      <li>Animated visual learning</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Interests</h4>
-                    <ul className="list-disc pl-5 space-y-1">
-                      <li>Human Behavior</li>
-                      <li>Any brain or story books</li>
-                      <li>Economics</li>
-                      <li>Cricket</li>
-                      <li>Rafting</li>
-                      <li>Naruto</li>
-                      <li>Mr. Bean</li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+        {/* Enhanced CTA section */}
+        <motion.div
+          className="mt-20 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <div className="glass max-w-2xl mx-auto p-8 rounded-3xl border border-white/30 backdrop-blur-xl">
+            <h3 className="text-2xl font-heading font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Let's Connect & Collaborate
+            </h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              Whether you're interested in AI research, need mentoring, or want to discuss potential collaborations, I'd love to hear from you!
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <motion.a
+                href="https://calendly.com/nilesharnaiya"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:shadow-lg transition-all duration-300"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>Book a Call</span>
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </motion.a>
+              <motion.a
+                href="https://mentorcruise.com/mentor/NileshArnaiya"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 glass rounded-full font-medium text-purple-700 hover:bg-white/20 transition-all duration-300"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>Mentoring Sessions</span>
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </motion.a>
+            </div>
           </div>
         </motion.div>
+
+        {/* Floating elements for decoration */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-70"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, Math.random() * 20 - 10, 0],
+                opacity: [0.3, 0.8, 0.3],
+                scale: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: Math.random() * 8 + 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 4,
+              }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

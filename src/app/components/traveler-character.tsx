@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useMemo } from "react"
 import { motion, useAnimation } from "framer-motion"
 import Image from "next/image"
 
@@ -8,11 +8,50 @@ export default function TravelerCharacter() {
   const controls = useAnimation()
   const characterRef = useRef<HTMLDivElement>(null)
 
+  const travelItems = useMemo(() => [
+    { 
+      emoji: "🎒", 
+      x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, 
+      y: 0, 
+      delay: 0 
+    },
+    { 
+      emoji: "🗺️", 
+      x: typeof window !== "undefined" ? Math.random() * window.innerWidth * 0.7 : Math.random() * 700, 
+      y: Math.random() * 100 + 50, 
+      delay: 1 
+    },
+    { 
+      emoji: "📸", 
+      x: typeof window !== "undefined" ? Math.random() * window.innerWidth * 0.7 : Math.random() * 700, 
+      y: Math.random() * 100 + 150, 
+      delay: 2 
+    },
+    { 
+      emoji: "🧭", 
+      x: typeof window !== "undefined" ? Math.random() * window.innerWidth * 0.7 : Math.random() * 700, 
+      y: Math.random() * 100 + 100, 
+      delay: 3 
+    },
+    { 
+      emoji: "🏔️", 
+      x: typeof window !== "undefined" ? Math.random() * window.innerWidth * 0.7 : Math.random() * 700, 
+      y: Math.random() * 100 + 200, 
+      delay: 4 
+    },
+    { 
+      emoji: "🎪", 
+      x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, 
+      y: 50, 
+      delay: 5 
+    },
+  ], [])
+
   useEffect(() => {
     const animateTraveler = async () => {
       // Initial position
       await controls.start({
-        x: window.innerWidth + 100,
+        x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000,
         y: 0,
         transition: { duration: 0 },
       })
@@ -21,7 +60,7 @@ export default function TravelerCharacter() {
       while (true) {
         // Walk in from right
         await controls.start({
-          x: Math.random() * window.innerWidth * 0.7,
+          x: typeof window !== "undefined" ? Math.random() * window.innerWidth * 0.7 : Math.random() * 700,
           transition: { duration: 7, ease: "linear" },
         })
 
@@ -40,7 +79,7 @@ export default function TravelerCharacter() {
 
         // Reset position
         await controls.start({
-          x: window.innerWidth + 100,
+          x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000,
           transition: { duration: 0 },
         })
       }
@@ -57,7 +96,7 @@ export default function TravelerCharacter() {
     <motion.div
       ref={characterRef}
       className="fixed bottom-[25%] z-30 pointer-events-none"
-      initial={{ x: window.innerWidth + 100, y: 0 }}
+      initial={{ x: typeof window !== "undefined" ? window.innerWidth + 100 : 1000, y: 0 }}
       animate={controls}
     >
       <div className="relative w-[100px] h-[180px]">
