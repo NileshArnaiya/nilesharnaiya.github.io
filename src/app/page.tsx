@@ -13,13 +13,23 @@ import AudioPlayer from "./components/audio-player"
 import AutoWalkingPencil from "./components/auto-walking-pencil"
 import VerticalNavigation from "./components/vertical-navigation"
 
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Replace with your new domain
+    window.location.href = "https://nilesh.figma.site";
+  }, []);
+
+  
   const [currentScene, setCurrentScene] = useState("home")
   const [audioEnabled, setAudioEnabled] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
 
+  
   const scenes = [
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
